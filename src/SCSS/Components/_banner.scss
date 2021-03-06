@@ -1,0 +1,12 @@
+.banner {
+	padding: 3rem;
+	text-align: center;
+	background-image: url("../../Assets/Images/corrodedMetalPic.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	box-shadow: inset 0 0 3rem $shadow-black;
+	&__header {
+		text-shadow: 0 2px 4px $shadow-yellow;
+		font-size: 4rem;
+	}
+}

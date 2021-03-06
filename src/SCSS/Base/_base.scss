@@ -1,0 +1,20 @@
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+html {
+	font-size: 62.5%; // 1rem = 10px ; 10 ÷ 16 = 0.625
+}
+
+body {
+	box-sizing: border-box;
+	font-family: "Germania One", cursive;
+	background-image: url("../../Assets/Images/dungeons-dragons-dice-roller-6275.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}

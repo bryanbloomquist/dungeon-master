@@ -1,0 +1,7 @@
+.sidebar {
+	background-color: $shadow-black-dark;
+	width: 100%;
+	@include respond(tablet) {
+		width: 33%;
+	}
+}

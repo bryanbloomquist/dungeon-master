@@ -1,0 +1,42 @@
+.login {
+	position: fixed;
+	top: 33%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 36rem;
+	height: 24rem;
+	background-color: $color-white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 0.7rem ridge $color-yellow;
+	box-shadow: 0 1rem 2rem $shadow-black;
+	& input {
+		margin-bottom: 2rem;
+		width: 90%;
+		padding: 1rem 2rem;
+		font-size: 2rem;
+		text-align: center;
+		font-family: "Germania One", cursive;
+		border: 4px inset;
+		outline: none !important;
+	}
+	& input:focus {
+		background-color: $shadow-yellow-light;
+	}
+	& button {
+		width: 90%;
+		padding: 1rem 2rem;
+		font-size: 2rem;
+		font-family: "Germania One", cursive;
+		border: 4px outset;
+		background-color: $color-yellow;
+		outline: none !important;
+	}
+	& button:active {
+		border-style: inset;
+		padding: 1.2rem 1rem 0.8rem 1rem;
+		background-color: $color-yellow-dark;
+	}
+}
