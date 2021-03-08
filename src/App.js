@@ -90,41 +90,7 @@ class App extends Component {
 	}
 
 	render() {
-		// let display;
-		// if (!this.state.nameVerified && !this.state.nameEntered) {
-		// 	display = (
-		// 		<Login
-		// 			clicked={this.loginHandler}
-		// 			name={this.state.groupName}
-		// 			changed={this.groupNameChangeHandler}
-		// 			enter={(e) => (e.key === "Enter" ? this.loginHandler() : null)}
-		// 		/>
-		// 	);
-		// } else if (!this.state.nameVerified && this.state.nameEntered) {
-		// 	display = (
-		// 		<Confirm
-		// 			name={this.state.groupName}
-		// 			exists={this.state.groupExists}
-		// 			clicked={(el) => this.confirmHandler(el)}
-		// 		/>
-		// 	);
-		// } else {
-		// 	display = (
-		// 		<MainBody>
-		// 			<Sidebar>
-		// 				<div>DiceRoller</div>
-		// 				<div>Add NPC</div>
-		// 				<div>Add PC</div>
-		// 			</Sidebar>
-		// 			<div>Combat Tracker</div>
-		// 		</MainBody>
-		// 	);
-		// }
 		return (
-			// 	<Aux>
-			// 		<Banner />
-			// 		{display}
-			// 	</Aux>
 			<Aux>
 				<Banner />
 				{!this.state.nameVerified ? (
