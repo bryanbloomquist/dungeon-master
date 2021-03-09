@@ -1,22 +1,28 @@
-.login {
-	position: fixed;
-	top: 33%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 36rem;
-	height: 24rem;
-	background-color: $color-white;
+.addMonster {
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	border: 0.7rem ridge $color-yellow;
-	box-shadow: 0 1rem 2rem $shadow-black;
-	& input {
-		margin-bottom: 2rem;
-		width: 90%;
-		padding: 1rem 2rem;
+	flex-wrap: wrap;
+	& h2 {
+		text-align: center;
+		font-size: 2.4rem;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid $color-yellow;
+		margin: 1rem;
+		width: 100%;
+		color: $color-yellow;
+	}
+	&__input--mon {
 		font-size: 2rem;
+		width: 100%;
+		margin: 1rem;
+		border: 4px inset;
+		& > div {
+			border-radius: 0;
+		}
+	}
+	&__input--num {
+		font-size: 2rem;
+		width: calc(50% - 2rem);
+		margin: 1rem;
 		text-align: center;
 		font-family: "Germania One", cursive;
 		border: 4px inset;
@@ -24,14 +30,16 @@
 	}
 	& input:focus {
 		background-color: $shadow-yellow-light;
+		color: $color-white;
 	}
+
 	& button {
-		width: 90%;
+		width: calc(50% - 2rem);
 		padding: 1rem 2rem;
 		font-size: 2rem;
 		font-family: "Germania One", cursive;
 		border: 4px outset;
-		margin-bottom: 10px;
+		margin: 1rem;
 		background-color: $color-yellow;
 		outline: none !important;
 	}
@@ -39,10 +47,5 @@
 		border-style: inset;
 		padding: 1.2rem 1rem 0.8rem 1rem;
 		background-color: $color-yellow-dark;
-	}
-	& p {
-		font-size: 2rem;
-		margin-bottom: 2rem;
-		text-align: center;
 	}
 }

@@ -6,6 +6,9 @@ import Login from "./Components/Login/Login";
 import Confirm from "./Components/Confirm/Confirm";
 import MainBody from "./Components/MainBody/MainBody";
 import Sidebar from "./Components/Sidebar/Sidebar";
+import Button from "./Components/Sidebar/Button/Button";
+import Accordion from "./Components/Sidebar/Accordion/Accordion";
+
 import "./SCSS/main.scss";
 
 const db = Firebase.firestore();
@@ -16,19 +19,21 @@ class App extends Component {
 		groupExists: false,
 		nameVerified: null,
 		groupName: "",
+		selectedNPC: "",
+		numberSelected: null,
 		namesArray: [],
 		monstersArray: [],
+		monsterOptions: [],
 	};
 
 	fetchFirestore = () => {
-		console.log("Fetch Firestore Here!");
 		db.collection("srd__monsters")
 			.doc("monster__names")
 			.get()
 			.then((doc) => {
 				const tempArr = doc.data().namesArray;
 				this.setState({ namesArray: tempArr });
-				console.log("Set Names Array Here!");
+				this.createMonsterOptions();
 			});
 		db.collection("srd__monsters")
 			.doc("monster__stats")
@@ -38,8 +43,17 @@ class App extends Component {
 				const arr2 = [];
 				arr1.forEach((el) => arr2.push(JSON.parse(el)));
 				this.setState({ monstersArray: arr2 });
-				console.log("Set Monsters Array Here!");
 			});
+	};
+
+	createMonsterOptions = () => {
+		let arr1 = [...this.state.namesArray];
+		console.log(arr1);
+		let arr2 = [];
+		arr1.forEach((monster) =>
+			arr2.push({ label: monster.name, value: monster.index })
+		);
+		this.setState({ monsterOptions: arr2 });
 	};
 
 	loginHandler = () => {
@@ -52,16 +66,12 @@ class App extends Component {
 				);
 
 			this.setState({ nameEntered: true });
-			console.log(this.state.groupName);
-			console.log(this.state.monstersArray);
-			console.log(this.state.nameVerified);
 		}
 	};
 
 	confirmHandler = (el) => {
 		const choice = el.target.value;
 		const exists = this.state.groupExists;
-		console.log(choice);
 		if (choice === "yes" && exists === true) {
 			this.setState({ nameVerified: true });
 		} else if (choice === "yes" && exists === false) {
@@ -75,12 +85,28 @@ class App extends Component {
 				groupName: "",
 			});
 		}
-		console.log(this.state.nameVerified);
 	};
 
-	groupNameChangeHandler = (event) => {
-		const typedGroup = event.target.value;
-		this.setState({ groupName: typedGroup });
+	groupNameChangeHandler = (event) =>
+		this.setState({ groupName: event.target.value });
+
+	sidebarHandler = (e) => {
+		console.log(e.target.value);
+	};
+
+	npcChangeHandler = (event) => this.setState({ selectedNPC: event.value });
+
+	numChangeHandler = (event) =>
+		this.setState({ numberSelected: event.target.value });
+
+	loadMonster = () => {
+		if (this.state.selectedNPC && this.state.numberSelected) {
+			const tempArr = [...this.state.monstersArray];
+			const selectedNPC = tempArr.filter((el) => {
+				return el.index === this.state.selectedNPC;
+			});
+			console.log(selectedNPC);
+		}
 	};
 
 	componentDidMount() {
@@ -111,9 +137,27 @@ class App extends Component {
 				) : (
 					<MainBody>
 						<Sidebar>
-							<div>DiceRoller</div>
-							<div>Add NPC</div>
-							<div>Add PC</div>
+							<Button
+								clicked={(el) => this.sidebarHandler(el)}
+								value={"dice"}
+								name={"Dice Roller"}
+							/>
+							<Button
+								clicked={(el) => this.sidebarHandler(el)}
+								value={"monster"}
+								name={"Add NPC"}
+							/>
+							<Button
+								clicked={(el) => this.sidebarHandler(el)}
+								value={"players"}
+								name={"Add PC"}
+							/>
+							<Accordion
+								options={this.state.monsterOptions}
+								clicked={this.loadMonster}
+								changedNpc={this.npcChangeHandler.bind(this)}
+								changedNum={(el) => this.numChangeHandler(el)}
+							/>
 						</Sidebar>
 						<div>Combat Tracker</div>
 					</MainBody>
