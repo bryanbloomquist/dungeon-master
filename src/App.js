@@ -6,8 +6,6 @@ import Login from "./Components/Login/Login";
 import Confirm from "./Components/Confirm/Confirm";
 import MainBody from "./Components/MainBody/MainBody";
 import Sidebar from "./Components/Sidebar/Sidebar";
-import Button from "./Components/Sidebar/Button/Button";
-import Accordion from "./Components/Sidebar/Accordion/Accordion";
 
 import "./SCSS/main.scss";
 
@@ -136,29 +134,13 @@ class App extends Component {
 					)
 				) : (
 					<MainBody>
-						<Sidebar>
-							<Button
-								clicked={(el) => this.sidebarHandler(el)}
-								value={"dice"}
-								name={"Dice Roller"}
-							/>
-							<Button
-								clicked={(el) => this.sidebarHandler(el)}
-								value={"monster"}
-								name={"Add NPC"}
-							/>
-							<Button
-								clicked={(el) => this.sidebarHandler(el)}
-								value={"players"}
-								name={"Add PC"}
-							/>
-							<Accordion
-								options={this.state.monsterOptions}
-								clicked={this.loadMonster}
-								changedNpc={this.npcChangeHandler.bind(this)}
-								changedNum={(el) => this.numChangeHandler(el)}
-							/>
-						</Sidebar>
+						<Sidebar
+							clicked={(el) => this.sidebarHandler(el)}
+							optionsNpc={this.state.monsterOptions}
+							clickedNpc={this.loadMonster}
+							changedNpc={this.npcChangeHandler.bind(this)}
+							changedNpcNum={(el) => this.numChangeHandler(el)}
+						/>
 						<div>Combat Tracker</div>
 					</MainBody>
 				)}

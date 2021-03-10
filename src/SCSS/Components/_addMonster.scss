@@ -2,13 +2,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	& h2 {
-		text-align: center;
-		font-size: 2.4rem;
-		padding-bottom: 1rem;
-		border-bottom: 1px solid $color-yellow;
-		margin: 1rem;
 		width: 100%;
-		color: $color-yellow;
 	}
 	&__input--mon {
 		font-size: 2rem;
@@ -32,20 +26,7 @@
 		background-color: $shadow-yellow-light;
 		color: $color-white;
 	}
-
 	& button {
 		width: calc(50% - 2rem);
-		padding: 1rem 2rem;
-		font-size: 2rem;
-		font-family: "Germania One", cursive;
-		border: 4px outset;
-		margin: 1rem;
-		background-color: $color-yellow;
-		outline: none !important;
-	}
-	& button:active {
-		border-style: inset;
-		padding: 1.2rem 1rem 0.8rem 1rem;
-		background-color: $color-yellow-dark;
 	}
 }

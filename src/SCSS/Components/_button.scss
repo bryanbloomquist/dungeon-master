@@ -1,0 +1,19 @@
+button {
+	width: 100%;
+	padding: 1rem 2rem;
+	font-size: 2rem;
+	text-transform: capitalize;
+	font-family: "Germania One", cursive;
+	border: 4px outset;
+	margin: 1rem;
+	background-color: $color-yellow;
+	// outline: none !important;
+	&:active {
+		border-style: inset;
+		padding: 1.2rem 1rem 0.8rem 1rem;
+		background-color: $color-yellow-dark;
+	}
+	&:focus {
+		outline-color: $color-black;
+	}
+}

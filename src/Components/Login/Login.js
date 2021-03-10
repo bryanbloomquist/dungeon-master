@@ -1,15 +1,16 @@
 import React from "react";
+import Button from "../Button/Button";
 
 const login = (props) => (
 	<div className='login'>
 		<input
 			type='text'
-			placeholder='Enter Your Group Name...'
+			placeholder='Enter Group Name...'
 			onChange={props.changed}
 			value={props.name}
 			onKeyPress={props.enter}
-		></input>
-		<button onClick={props.clicked}>Submit</button>
+		/>
+		<Button clicked={props.clicked} title={"submit"} />
 	</div>
 );
 

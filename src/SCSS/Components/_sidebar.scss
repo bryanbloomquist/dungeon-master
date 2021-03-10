@@ -6,23 +6,10 @@
 	@include respond(tablet) {
 		width: 33%;
 	}
-	&__button {
+	& > button {
 		width: 90%;
-		padding: 1rem 2rem;
-		font-size: 2rem;
-		font-family: "Germania One", cursive;
-		border: 4px outset;
-		margin: 1rem auto;
-		background-color: $color-yellow;
-		outline: none !important;
 		@include respond(tablet) {
 			width: calc(33.333% - 2rem);
-			margin: 1rem;
 		}
-	}
-	&__button:active {
-		border-style: inset;
-		padding: 1.2rem 1rem 0.8rem 1rem;
-		background-color: $color-yellow-dark;
 	}
 }

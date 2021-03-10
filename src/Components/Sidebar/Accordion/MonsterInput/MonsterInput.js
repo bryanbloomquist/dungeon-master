@@ -1,13 +1,13 @@
 import React from "react";
 import Select from "react-select";
-import Aux from "../../../../Containers/HOC/Aux";
+import Button from "../../../Button/Button";
 
 const monsterInput = (props) => (
-	<Aux>
+	<div className='addMonster'>
 		<h2>Add Monster:</h2>
 		<Select
 			className='addMonster__input--mon'
-			options={props.options}
+			options={props.optionsNpc}
 			onChange={props.changedNpc}
 			isSearchable={true}
 		/>
@@ -17,10 +17,10 @@ const monsterInput = (props) => (
 			min='1'
 			max='12'
 			placeholder='How Many?'
-			onChange={props.changedNum}
+			onChange={props.changedNpcNum}
 		/>
-		<button onClick={props.clicked}>Submit</button>
-	</Aux>
+		<Button clicked={props.clickedNpc} title={"submit"} />
+	</div>
 );
 
 export default monsterInput;

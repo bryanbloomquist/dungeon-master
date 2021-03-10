@@ -27,18 +27,6 @@
 	}
 	& button {
 		width: 90%;
-		padding: 1rem 2rem;
-		font-size: 2rem;
-		font-family: "Germania One", cursive;
-		border: 4px outset;
-		margin-bottom: 10px;
-		background-color: $color-yellow;
-		outline: none !important;
-	}
-	& button:active {
-		border-style: inset;
-		padding: 1.2rem 1rem 0.8rem 1rem;
-		background-color: $color-yellow-dark;
 	}
 	& p {
 		font-size: 2rem;
