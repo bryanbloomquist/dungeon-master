@@ -3,13 +3,11 @@
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	@include respond(tablet) {
 		width: 33%;
 	}
 	& > button {
-		width: 90%;
-		@include respond(tablet) {
-			width: calc(33.333% - 2rem);
-		}
+		width: calc(33.333% - 2rem);
 	}
 }

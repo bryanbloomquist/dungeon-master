@@ -1,0 +1,41 @@
+.diceRoller {
+	display: flex;
+	flex-wrap: wrap;
+	& h2 {
+		width: 100%;
+	}
+	& label {
+		margin: 1rem;
+		width: calc(50% - 2rem);
+		color: $color-white;
+		font-size: 2rem;
+	}
+	& input,
+	& select {
+		margin: 1rem;
+		width: calc(50% - 2rem);
+		padding: 0 1rem;
+		font-size: 2rem;
+		font-family: "Germaina One", cursive;
+		border: 4px inset;
+		outline: none !important;
+	}
+	& input:focus {
+		background-color: $shadow-yellow-light;
+		color: $color-white;
+	}
+	& .diceTray {
+		padding: 1rem;
+		background: $color-white;
+		margin: 1rem;
+		text-align: center;
+		width: 100%;
+		min-height: 100px;
+		font-size: 2rem;
+		& p:not(:last-child) {
+			border-bottom: 3px solid $color-yellow;
+			margin-bottom: 4px;
+			padding-bottom: 4px;
+		}
+	}
+}

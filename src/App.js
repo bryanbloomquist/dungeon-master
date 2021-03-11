@@ -80,6 +80,7 @@ class App extends Component {
 		} else if (choice === "no") {
 			this.setState({
 				nameEntered: null,
+				groupExists: false,
 				groupName: "",
 			});
 		}
