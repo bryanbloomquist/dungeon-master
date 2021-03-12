@@ -3,8 +3,8 @@ import Select from "react-select";
 import Button from "../../../Button/Button";
 
 const monsterInput = (props) => (
-	<div className='addMonster'>
-		<h2>Add Monster:</h2>
+	<div className={props.classname}>
+		<h2>Add Monster</h2>
 		<Select
 			className='addMonster__input--mon'
 			options={props.optionsNpc}

@@ -1,6 +1,9 @@
 .diceRoller {
+	height: 44.4rem;
 	display: flex;
 	flex-wrap: wrap;
+	overflow: hidden;
+	transition: all 1s;
 	& h2 {
 		width: 100%;
 	}
@@ -37,5 +40,9 @@
 			margin-bottom: 4px;
 			padding-bottom: 4px;
 		}
+	}
+	&.hidden {
+		height: 0;
+		visibility: hidden;
 	}
 }

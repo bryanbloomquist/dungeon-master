@@ -3,15 +3,18 @@ import Button from "../../../Button/Button";
 import axios from "axios";
 
 class DiceRoller extends Component {
-	state = {
-		numDice: 1,
-		numSides: 4,
-		modifier: 0,
-		numDiceArray: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-		line1: "Dice:",
-		line2: "Results:",
-		line3: "Total:",
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			numDice: 1,
+			numSides: 4,
+			modifier: 0,
+			numDiceArray: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+			line1: "[ Dice ]",
+			line2: "[ Results ]",
+			line3: "[ Total ]",
+		};
+	}
 
 	changeNumDice = (event) =>
 		this.setState({ numDice: parseInt(event.target.value) });
@@ -39,17 +42,16 @@ class DiceRoller extends Component {
 				const input = response.data.input;
 				const result = response.data.result;
 				const total = parseInt(result) + modifier;
-				const line1 = "Dice: " + input + "+" + modifier;
-				const line2 =
-					"Results: " + details.join("").replace(/ /g, "") + "+" + modifier;
-				const line3 = "Total:" + total;
+				const line1 = input + "+" + modifier;
+				const line2 = details.join("").replace(/ /g, "") + "+" + modifier;
+				const line3 = "Total: " + total;
 				this.setState({ line1: line1, line2: line2, line3: line3 });
 			});
 	};
 
 	render() {
 		return (
-			<div className='diceRoller'>
+			<div className={this.props.classname}>
 				<h2>Dice Roller</h2>
 				<label htmlFor='numDice'>Number of Dice:</label>
 				<select id='numDice' onChange={(el) => this.changeNumDice(el)}>

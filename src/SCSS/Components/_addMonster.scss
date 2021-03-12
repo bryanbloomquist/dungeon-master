@@ -1,6 +1,9 @@
 .addMonster {
+	height: 19.6rem;
 	display: flex;
 	flex-wrap: wrap;
+	overflow: hidden;
+	transition: all 1s;
 	& h2 {
 		width: 100%;
 	}
@@ -28,5 +31,9 @@
 	}
 	& button {
 		width: calc(50% - 2rem);
+	}
+	&.hidden {
+		height: 0;
+		visibility: hidden;
 	}
 }

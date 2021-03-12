@@ -1,0 +1,21 @@
+.addPc {
+	height: 60rem;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	overflow: hidden;
+	transition: all 1s;
+	&.hidden {
+		height: 0;
+		visibility: hidden;
+	}
+	& h2 {
+		width: 100%;
+	}
+	& h3 {
+		width: 100%;
+		color: $color-white;
+		text-align: center;
+		font-size: 2rem;
+	}
+}

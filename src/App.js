@@ -19,6 +19,9 @@ class App extends Component {
 		groupName: "",
 		selectedNPC: "",
 		numberSelected: null,
+		showDice: false,
+		showNpc: false,
+		showPc: false,
 		namesArray: [],
 		monstersArray: [],
 		monsterOptions: [],
@@ -90,7 +93,37 @@ class App extends Component {
 		this.setState({ groupName: event.target.value });
 
 	sidebarHandler = (e) => {
-		console.log(e.target.value);
+		const target = e.target.value;
+		let boolean;
+		console.log(target);
+		switch (target) {
+			case "dice":
+				boolean = !this.state.showDice;
+				this.setState({
+					showDice: boolean,
+					showNpc: false,
+					showPc: false,
+				});
+				break;
+			case "monster":
+				boolean = !this.state.showNpc;
+				this.setState({
+					showDice: false,
+					showNpc: boolean,
+					showPc: false,
+				});
+				break;
+			case "players":
+				boolean = !this.state.showPc;
+				this.setState({
+					showDice: false,
+					showNpc: false,
+					showPc: boolean,
+				});
+				break;
+			default:
+				break;
+		}
 	};
 
 	npcChangeHandler = (event) => this.setState({ selectedNPC: event.value });
@@ -136,6 +169,9 @@ class App extends Component {
 				) : (
 					<MainBody>
 						<Sidebar
+							showDice={this.state.showDice}
+							showNpc={this.state.showNpc}
+							showPc={this.state.showPc}
 							clicked={(el) => this.sidebarHandler(el)}
 							optionsNpc={this.state.monsterOptions}
 							clickedNpc={this.loadMonster}

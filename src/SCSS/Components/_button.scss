@@ -1,12 +1,16 @@
 button {
 	width: 100%;
 	padding: 1rem;
-	font-size: 2rem;
+	font-size: 1.6rem;
 	text-transform: capitalize;
 	font-family: "Germania One", cursive;
 	border: 4px outset;
+	border-radius: 4px;
 	margin: 1rem;
 	background-color: $color-yellow;
+	@include respond(tablet) {
+		font-size: 2rem;
+	}
 	// outline: none !important;
 	&:active {
 		border-style: inset;
