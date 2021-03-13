@@ -8,7 +8,7 @@ const sidebar = (props) => {
 			<Button
 				clicked={props.clicked}
 				value='dice'
-				title={<i class='fas fa-dice-d20 fa-spin'></i>}
+				title={<i className='fas fa-dice-d20 fa-spin'></i>}
 			/>
 			<Button clicked={props.clicked} value='monster' title='add NPC' />
 			<Button clicked={props.clicked} value='players' title='add PC' />

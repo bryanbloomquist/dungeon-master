@@ -1,0 +1,15 @@
+input,
+select {
+	margin: 1rem;
+	width: $fullwidth;
+	padding: 1rem 2rem;
+	font-size: 2rem;
+	text-align: center;
+	font-family: "Germania One", cursive;
+	border: 4px inset;
+	outline: none !important;
+}
+
+input:focus {
+	background-color: $shadow-yellow-light;
+}

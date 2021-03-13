@@ -1,15 +1,41 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../../../../AppContext";
 import Button from "../../../Button/Button";
+import Input from "../../../Input/Input";
 
-const playerInput = (props) => (
-	<div className={props.classname}>
-		<h2>Add Player</h2>
-		<h3>Character Name</h3>
-		<h3>Initiative Roll</h3>
-		<h3>Armor Class</h3>
-		<h3>Max Health</h3>
-		<Button clicked={props.clickedPc} title={"submit"} />
-	</div>
-);
+const PlayerInput = (props) => {
+	const { testContext, handleInputChange } = useContext(Context);
 
-export default playerInput;
+	return (
+		<div className={props.classname}>
+			<h2>Add Player</h2>
+			<Input
+				type='text'
+				text='Add Character Name...'
+				changed={handleInputChange}
+				value={testContext}
+			/>
+			<Input
+				type='number'
+				text='Add Initiative Rol...'
+				changed={handleInputChange}
+				value={testContext}
+			/>
+			<Input
+				type='number'
+				text='Add Armor Class...'
+				changed={handleInputChange}
+				value={testContext}
+			/>
+			<Input
+				type='number'
+				text='Add Hit Points...'
+				changed={handleInputChange}
+				value={testContext}
+			/>
+			<Button clicked={props.clickedPc} title={"submit"} />
+		</div>
+	);
+};
+
+export default PlayerInput;

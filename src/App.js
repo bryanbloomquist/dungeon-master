@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { Provider } from "./AppContext";
 import Firebase from "./Components/Firebase/Firebase";
-import Aux from "./Containers/HOC/Aux";
 import Banner from "./Components/Banner/Banner";
 import Login from "./Components/Login/Login";
 import Confirm from "./Components/Confirm/Confirm";
@@ -149,7 +149,7 @@ class App extends Component {
 
 	render() {
 		return (
-			<Aux>
+			<Provider>
 				<Banner />
 				{!this.state.nameVerified ? (
 					!this.state.nameEntered ? (
@@ -181,7 +181,7 @@ class App extends Component {
 						<div>Combat Tracker</div>
 					</MainBody>
 				)}
-			</Aux>
+			</Provider>
 		);
 	}
 }

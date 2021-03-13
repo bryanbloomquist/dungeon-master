@@ -11,3 +11,8 @@ $shadow-black-dark: rgba(0, 0, 0, 0.75);
 $shadow-yellow: rgba(252, 210, 81, 0.5);
 $shadow-yellow-light: rgba(252, 210, 81, 0.25);
 $shadow-yellow-dark: rgba(252, 210, 81, 0.75);
+
+//calc
+
+$fullwidth: calc(100% - 2rem);
+$halfwidth: calc(50% - 2rem);

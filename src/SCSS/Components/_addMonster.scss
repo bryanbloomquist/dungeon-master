@@ -1,7 +1,5 @@
 .addMonster {
-	height: 19.6rem;
-	display: flex;
-	flex-wrap: wrap;
+	height: 44rem;
 	overflow: hidden;
 	transition: all 1s;
 	& h2 {
@@ -9,7 +7,7 @@
 	}
 	&__input--mon {
 		font-size: 2rem;
-		width: 100%;
+		width: $fullwidth;
 		margin: 1rem;
 		border: 4px inset;
 		& > div {
@@ -17,20 +15,11 @@
 		}
 	}
 	&__input--num {
-		font-size: 2rem;
-		width: calc(50% - 2rem);
-		margin: 1rem;
-		text-align: center;
-		font-family: "Germania One", cursive;
-		border: 4px inset;
-		outline: none !important;
-	}
-	& input:focus {
-		background-color: $shadow-yellow-light;
-		color: $color-white;
+		width: $halfwidth;
+		padding: 1rem 2rem;
 	}
 	& button {
-		width: calc(50% - 2rem);
+		width: $halfwidth;
 	}
 	&.hidden {
 		height: 0;

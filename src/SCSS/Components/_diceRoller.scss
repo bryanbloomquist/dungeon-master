@@ -9,30 +9,20 @@
 	}
 	& label {
 		margin: 1rem;
-		width: calc(50% - 2rem);
+		width: $halfwidth;
 		color: $color-white;
 		font-size: 2rem;
 	}
-	& input,
 	& select {
-		margin: 1rem;
-		width: calc(50% - 2rem);
-		padding: 0 1rem;
-		font-size: 2rem;
-		font-family: "Germaina One", cursive;
-		border: 4px inset;
-		outline: none !important;
-	}
-	& input:focus {
-		background-color: $shadow-yellow-light;
-		color: $color-white;
+		width: $halfwidth;
+		padding: 0rem 1rem;
 	}
 	& .diceTray {
 		padding: 1rem;
 		background: $color-white;
 		margin: 1rem;
 		text-align: center;
-		width: 100%;
+		width: $fullwidth;
 		min-height: 100px;
 		font-size: 2rem;
 		& p:not(:last-child) {
