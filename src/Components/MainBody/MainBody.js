@@ -1,5 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../../AppContext";
 
-const MainBody = (props) => <div className='mainBody'>{props.children}</div>;
+const MainBody = (props) => {
+	const { nameEntrd, nameVrify } = useContext(Context);
+
+	return nameEntrd && nameVrify ? (
+		<div className='mainBody'>{props.children}</div>
+	) : null;
+};
 
 export default MainBody;

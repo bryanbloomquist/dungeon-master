@@ -4,36 +4,47 @@ import Button from "../../../Button/Button";
 import Input from "../../../Input/Input";
 
 const PlayerInput = (props) => {
-	const { testContext, handleInputChange } = useContext(Context);
+	const {
+		showPc,
+		charName,
+		charInit,
+		charArmr,
+		charHlth,
+		handleCharNameChange,
+		handleCharInitChange,
+		handleCharArmrChange,
+		handleCharHlthChange,
+		addNewChar,
+	} = useContext(Context);
 
 	return (
-		<div className={props.classname}>
+		<div className={showPc ? "addPc" : "addPc hidden"}>
 			<h2>Add Player</h2>
 			<Input
 				type='text'
 				text='Add Character Name...'
-				changed={handleInputChange}
-				value={testContext}
+				changed={handleCharNameChange}
+				value={charName}
 			/>
 			<Input
 				type='number'
 				text='Add Initiative Rol...'
-				changed={handleInputChange}
-				value={testContext}
+				changed={handleCharInitChange}
+				value={charInit}
 			/>
 			<Input
 				type='number'
 				text='Add Armor Class...'
-				changed={handleInputChange}
-				value={testContext}
+				changed={handleCharArmrChange}
+				value={charArmr}
 			/>
 			<Input
 				type='number'
 				text='Add Hit Points...'
-				changed={handleInputChange}
-				value={testContext}
+				changed={handleCharHlthChange}
+				value={charHlth}
 			/>
-			<Button clicked={props.clickedPc} title={"submit"} />
+			<Button clicked={addNewChar} title={"submit"} />
 		</div>
 	);
 };

@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../../AppContext";
+
 import Button from "../Button/Button";
 
-const confirm = (props) => {
-	return (
+const Confirm = (props) => {
+	const {
+		groupName,
+		groupExst,
+		nameEntrd,
+		nameVrify,
+		handleGroupVerify,
+	} = useContext(Context);
+	return nameEntrd && !nameVrify ? (
 		<div className='login'>
 			<p>
-				{props.exists
-					? props.name + " exists, do you want to join?"
-					: props.name + " does not exist, do you wish to create this group?"}
+				{groupExst
+					? groupName + " exists, do you want to join?"
+					: groupName + " does not exist, do you wish to create this group?"}
 			</p>
-			<Button clicked={props.clicked} value='yes' title='yes' />
-			<Button clicked={props.clicked} value='no' title='no' />
+			<Button clicked={handleGroupVerify} value='yes' title='yes' />
+			<Button clicked={handleGroupVerify} value='no' title='no' />
 		</div>
-	);
+	) : null;
 };
 
-export default confirm;
+export default Confirm;

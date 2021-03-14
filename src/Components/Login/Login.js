@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../../AppContext";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 
-const login = (props) => (
-	<div className='login'>
-		<Input
-			type='text'
-			text='Enter Group Name'
-			changed={props.changed}
-			value={props.name}
-			enter={props.enter}
-		/>
-		<Button clicked={props.clicked} title={"submit"} />
-	</div>
-);
+const Login = () => {
+	const {
+		groupName,
+		nameEntrd,
+		nameVrify,
+		handleGroupChange,
+		handleLoginSubmit,
+	} = useContext(Context);
 
-export default login;
+	return !nameEntrd && !nameVrify ? (
+		<div className='login'>
+			<Input
+				type='text'
+				text='Enter Group Name'
+				changed={handleGroupChange}
+				value={groupName}
+				enter={(e) => (e.key === "Enter" ? handleGroupChange : null)}
+			/>
+			<Button clicked={handleLoginSubmit} title={"submit"} />
+		</div>
+	) : null;
+};
+export default Login;

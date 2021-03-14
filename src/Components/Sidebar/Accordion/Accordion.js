@@ -1,24 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../../../AppContext";
 import DiceRoller from "./DiceRoller/DiceRoller";
 import MonsterInput from "./MonsterInput/MonsterInput";
 import PlayerInput from "./PlayerInput/PlayerInput";
 
-const accordion = (props) => {
+const Accordion = () => {
+	const { showDice } = useContext(Context);
 	return (
 		<div className='accordion'>
-			<DiceRoller
-				classname={props.showDice ? "diceRoller" : "diceRoller hidden"}
-			/>
-			<MonsterInput
-				classname={props.showNpc ? "addMonster" : "addMonster hidden"}
-				optionsNpc={props.optionsNpc}
-				clickedNpc={props.clickedNpc}
-				changedNpc={props.changedNpc}
-				changedNpcNum={props.changedNpcNum}
-			/>
-			<PlayerInput classname={props.showPc ? "addPc" : "addPc hidden"} />
+			<DiceRoller classname={showDice ? "diceRoller" : "diceRoller hidden"} />
+			<MonsterInput />
+			<PlayerInput />
 		</div>
 	);
 };
 
-export default accordion;
+export default Accordion;
