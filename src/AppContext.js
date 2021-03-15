@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Firebase from "./Components/Firebase/Firebase";
+import Firebase from "./Firebase";
 
 const db = Firebase.firestore();
 
@@ -115,6 +115,13 @@ const Provider = ({ children }) => {
 
 	const [npcSelected, setNpcSelected] = useState(null);
 	const [numSelected, setNumSelected] = useState(1);
+	const [addMonster, setAddMonster] = useState({
+		init: "",
+		name: "",
+		armr: "",
+		hlth: "",
+	});
+	const [addMonsterArray, setAddMonsterArray] = useState({});
 	const npcChangeHandler = (event) => setNpcSelected(event.value);
 	const numChangeHandler = (event) => setNumSelected(event.target.value);
 	const loadMonsterStats = () => {
@@ -124,7 +131,40 @@ const Provider = ({ children }) => {
 				return el.index === npcSelected;
 			});
 			console.log(selectedNPC);
+			const newMonsterDext = selectedNPC[0].dexterity;
+			const newMonsterInit = rollInitiative(newMonsterDext);
+			const newMonsterName = selectedNPC[0].name;
+			const newMonsterArmr = selectedNPC[0].armor_class;
+			const newMonsterHlth = selectedNPC[0].hit_points;
+			setAddMonster({
+				init: newMonsterInit,
+				name: newMonsterName,
+				armr: newMonsterArmr,
+				hlth: newMonsterHlth,
+			});
+			newFunction();
 		}
+	};
+	const newFunction = () => {
+		db.collection("table__groups")
+			.doc(groupName)
+			.get()
+			.then((doc) => {
+				let arr1 = doc.data().table__data;
+				let arr2 = [JSON.parse(arr1)];
+				for (let i = 0; i < numSelected; i++) {
+					arr2.push(addMonster);
+				}
+				setAddMonsterArray(arr2);
+			})
+			.then(secondNewFunction());
+	};
+	const secondNewFunction = () => {
+		console.log("Test");
+		// 	db.collection("table__groups")
+		// 		.doc(groupName)
+		// 		.set({ table__data: JSON.stringify(addMonster) });
+		// }
 	};
 
 	// *** Add Player *** //
@@ -149,6 +189,46 @@ const Provider = ({ children }) => {
 		}
 	};
 
+	// *** Combat Table *** //
+
+	const rollInitiative = (dex) => {
+		let initiative = Math.floor(Math.random() * 20) + 1;
+		console.log(initiative);
+		if (dex === 1) {
+			initiative -= 5;
+		} else if (dex === 2 || 3) {
+			initiative -= 4;
+		} else if (dex === 4 || 5) {
+			initiative -= 3;
+		} else if (dex === 6 || 7) {
+			initiative -= 2;
+		} else if (dex === 8 || 9) {
+			initiative -= 1;
+		} else if (dex === 12 || 13) {
+			initiative += 1;
+		} else if (dex === 14 || 15) {
+			initiative += 2;
+		} else if (dex === 16 || 17) {
+			initiative += 3;
+		} else if (dex === 18 || 19) {
+			initiative += 4;
+		} else if (dex === 20 || 21) {
+			initiative += 5;
+		} else if (dex === 22 || 23) {
+			initiative += 6;
+		} else if (dex === 24 || 25) {
+			initiative += 7;
+		} else if (dex === 26 || 27) {
+			initiative += 8;
+		} else if (dex === 28 || 29) {
+			initiative += 9;
+		} else if (dex === 30) {
+			initiative += 10;
+		}
+		console.log(initiative);
+		return initiative;
+	};
+
 	return (
 		<Context.Provider
 			value={{
@@ -169,6 +249,8 @@ const Provider = ({ children }) => {
 				sidebarHandler,
 				npcSelected,
 				numSelected,
+				addMonster,
+				addMonsterArray,
 				npcChangeHandler,
 				numChangeHandler,
 				loadMonsterStats,

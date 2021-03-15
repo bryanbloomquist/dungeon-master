@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { Context } from "../../../../AppContext";
-import Button from "../../../Button/Button";
-import Input from "../../../Input/Input";
+import { Context } from "../../../../../AppContext";
+import Button from "../../../../Button/Button";
+import Input from "../../../../Input/Input";
 
 const PlayerInput = (props) => {
 	const {

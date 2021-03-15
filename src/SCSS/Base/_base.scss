@@ -12,9 +12,13 @@ html {
 
 body {
 	box-sizing: border-box;
-	font-family: "Germania One", cursive;
+
 	background-image: url("../../Assets/Images/dungeons-dragons-dice-roller-6275.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
+
+	font-family: "Germania One", cursive;
+	font-size: 2rem;
+	color: $color-black;
 }

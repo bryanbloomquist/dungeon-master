@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { Context } from "../../AppContext";
-import Button from "../Button/Button";
+import { Context } from "../../../AppContext";
+import Button from "../../Button/Button";
 import Accordion from "./Accordion/Accordion";
 
 const Sidebar = (props) => {

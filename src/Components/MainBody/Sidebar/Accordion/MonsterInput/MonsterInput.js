@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { Context } from "../../../../AppContext";
+import { Context } from "../../../../../AppContext";
 import Select from "react-select";
-import Button from "../../../Button/Button";
+import Button from "../../../../Button/Button";
 
 const MonsterInput = () => {
 	const {
