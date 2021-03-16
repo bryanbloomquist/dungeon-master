@@ -28,7 +28,7 @@ const PlayerInput = (props) => {
 			/>
 			<Input
 				type='number'
-				text='Add Initiative Rol...'
+				text='Add Initiative Roll...'
 				changed={handleCharInitChange}
 				value={charInit}
 			/>

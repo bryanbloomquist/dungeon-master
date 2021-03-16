@@ -11,8 +11,9 @@ const Provider = ({ children }) => {
 	const [monsterNamesArray, setMonsterNamesArray] = useState([]);
 	const [monsterStatsArray, setMonsterStatsArray] = useState([]);
 	const [monsterOptions, setMonsterOptions] = useState([]);
+
 	const fetchFirestore = () => {
-		console.log("Hello World");
+		console.log("***FUNC*** fechFirestore");
 		db.collection("srd__monsters")
 			.doc("monster__names")
 			.get()
@@ -30,13 +31,15 @@ const Provider = ({ children }) => {
 				setMonsterStatsArray(arr2);
 			});
 	};
+
 	const createMonsterOptions = () => {
-		console.log("Hello");
+		console.log("***FUNC*** createMonsterOptions");
 		let arr1 = [...monsterNamesArray];
 		let arr2 = [];
 		arr1.forEach((el) => arr2.push({ label: el.name, value: el.index }));
 		setMonsterOptions(arr2);
 	};
+
 	useEffect(() => {
 		fetchFirestore();
 	}, []);
@@ -47,8 +50,11 @@ const Provider = ({ children }) => {
 	const [groupExst, setGroupExst] = useState(false);
 	const [nameEntrd, setNameEntrd] = useState(false);
 	const [nameVrify, setNameVrify] = useState(false);
+
 	const handleGroupChange = (event) => setGroupName(event.target.value);
+
 	const handleLoginSubmit = () => {
+		console.log("***FUNC*** handleLoginSubmit");
 		if (groupName) {
 			db.collection("table__groups")
 				.doc(groupName)
@@ -57,14 +63,17 @@ const Provider = ({ children }) => {
 		}
 		setNameEntrd(true);
 	};
+
 	const handleGroupVerify = (el) => {
+		console.log("***FUNC*** handleGroupVerify");
 		const choice = el.target.value;
 		const exists = groupExst;
 		if (choice === "yes" && exists === true) {
 			setNameVrify(true);
 			createMonsterOptions();
+			loadTable();
 		} else if (choice === "yes" && exists === false) {
-			setNameVrify(false);
+			setNameVrify(true);
 			db.collection("table__groups")
 				.doc(groupName)
 				.set({ created: new Date() });
@@ -81,9 +90,10 @@ const Provider = ({ children }) => {
 	const [showDice, setShowDice] = useState(false);
 	const [showNpc, setShowNpc] = useState(false);
 	const [showPc, setShowPc] = useState(false);
+
 	const sidebarHandler = (e) => {
+		console.log("***FUNC*** sidebarHandler");
 		const target = e.target.value;
-		console.log(target);
 		let boolean;
 		switch (target) {
 			case "dice":
@@ -121,50 +131,32 @@ const Provider = ({ children }) => {
 		armr: "",
 		hlth: "",
 	});
-	const [addMonsterArray, setAddMonsterArray] = useState({});
+
 	const npcChangeHandler = (event) => setNpcSelected(event.value);
+
 	const numChangeHandler = (event) => setNumSelected(event.target.value);
+
 	const loadMonsterStats = () => {
+		console.log("***FUNC*** loadMonsterStats");
 		if (npcSelected && numSelected) {
 			const tempArr = [...monsterStatsArray];
-			const selectedNPC = tempArr.filter((el) => {
-				return el.index === npcSelected;
-			});
+			const selectedNPC = tempArr.filter((el) => el.index === npcSelected);
 			console.log(selectedNPC);
 			const newMonsterDext = selectedNPC[0].dexterity;
 			const newMonsterInit = rollInitiative(newMonsterDext);
 			const newMonsterName = selectedNPC[0].name;
 			const newMonsterArmr = selectedNPC[0].armor_class;
 			const newMonsterHlth = selectedNPC[0].hit_points;
-			setAddMonster({
+			const newMonster = {
 				init: newMonsterInit,
 				name: newMonsterName,
 				armr: newMonsterArmr,
 				hlth: newMonsterHlth,
-			});
-			newFunction();
+			};
+			// setAddMonster(newMonster);
+			addToTable(newMonster);
+			setAddMonster(newMonster);
 		}
-	};
-	const newFunction = () => {
-		db.collection("table__groups")
-			.doc(groupName)
-			.get()
-			.then((doc) => {
-				let arr1 = doc.data().table__data;
-				let arr2 = [JSON.parse(arr1)];
-				for (let i = 0; i < numSelected; i++) {
-					arr2.push(addMonster);
-				}
-				setAddMonsterArray(arr2);
-			})
-			.then(secondNewFunction());
-	};
-	const secondNewFunction = () => {
-		console.log("Test");
-		// 	db.collection("table__groups")
-		// 		.doc(groupName)
-		// 		.set({ table__data: JSON.stringify(addMonster) });
-		// }
 	};
 
 	// *** Add Player *** //
@@ -174,26 +166,77 @@ const Provider = ({ children }) => {
 	const [charArmr, setCharArmr] = useState("");
 	const [charHlth, setCharHlth] = useState("");
 	const [charStat, setCharStat] = useState({});
+
 	const handleCharNameChange = (event) => setCharName(event.target.value);
+
 	const handleCharInitChange = (event) => setCharInit(event.target.value);
+
 	const handleCharArmrChange = (event) => setCharArmr(event.target.value);
+
 	const handleCharHlthChange = (event) => setCharHlth(event.target.value);
+
 	const addNewChar = () => {
+		console.log("***FUNC*** addNewChar");
 		if (charName && charInit && charArmr && charHlth) {
-			setCharStat({
+			const newCharacter = {
+				init: parseInt(charInit),
 				name: charName,
-				init: charInit,
-				armr: charArmr,
-				hlth: charHlth,
-			});
+				armr: parseInt(charArmr),
+				hlth: parseInt(charHlth),
+			};
+			addToTable(newCharacter);
+			setCharStat(newCharacter);
 		}
 	};
 
 	// *** Combat Table *** //
 
+	const [tableData, setTableData] = useState([]);
+
+	const loadTable = () => {
+		console.log("***FUNC*** loadTable");
+	};
+
+	const addToTable = (newEntry) => {
+		console.log("***FUNC*** addToTable");
+		// setAddMonster(newEntry);
+		db.collection("table__groups")
+			.doc(groupName)
+			.get()
+			.then((doc) => {
+				let arr1 = doc.data().table__data;
+				let arr2 = arr1 ? [...JSON.parse(arr1)] : [];
+				for (let i = 0; i < numSelected; i++) {
+					arr2.push(newEntry);
+				}
+				console.log(arr2);
+				const finalArr = sortTable(arr2);
+				setTableData(finalArr);
+				updateTable(finalArr);
+			});
+	};
+
+	const updateTable = (arr2) => {
+		console.log("***FUNC*** updateTable");
+		console.log(arr2);
+		db.collection("table__groups")
+			.doc(groupName)
+			.set({ table__data: JSON.stringify(arr2) });
+	};
+
+	// useEffect(() => {
+	const sortTable = (arr) => {
+		console.log("***FUNC*** sortTable");
+		let unsorted = [...arr];
+		unsorted.sort((a, b) => parseFloat(b.init) - parseFloat(a.init));
+		return unsorted;
+	};
+	// 	sortTable();
+	// }, []);
+
 	const rollInitiative = (dex) => {
+		console.log("***FUNC*** rollInitiative");
 		let initiative = Math.floor(Math.random() * 20) + 1;
-		console.log(initiative);
 		if (dex === 1) {
 			initiative -= 5;
 		} else if (dex === 2 || 3) {
@@ -225,7 +268,6 @@ const Provider = ({ children }) => {
 		} else if (dex === 30) {
 			initiative += 10;
 		}
-		console.log(initiative);
 		return initiative;
 	};
 
@@ -250,7 +292,7 @@ const Provider = ({ children }) => {
 				npcSelected,
 				numSelected,
 				addMonster,
-				addMonsterArray,
+				tableData,
 				npcChangeHandler,
 				numChangeHandler,
 				loadMonsterStats,
