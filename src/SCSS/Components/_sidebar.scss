@@ -9,5 +9,6 @@
 	}
 	& > button {
 		width: calc(33.333% - 2rem);
+		max-height: 5rem;
 	}
 }

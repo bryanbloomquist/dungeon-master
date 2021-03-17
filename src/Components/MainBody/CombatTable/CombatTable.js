@@ -1,7 +1,15 @@
 import React, { useContext } from "react";
 import { Context } from "../../../AppContext";
+import TableRow from "./TableRow/TableRow";
 
 const CombatTable = () => {
+	const {
+		tableData,
+		handleValueChange,
+		handleHealthButton,
+		handleDmgeButton,
+		handleDeathButton,
+	} = useContext(Context);
 	return (
 		<table className='combatTable' id='combatTable'>
 			<thead className='combatTable__header'>
@@ -16,7 +24,24 @@ const CombatTable = () => {
 					<th>Dead</th>
 				</tr>
 			</thead>
-			<tbody id='combatTable-Body'></tbody>
+			<tbody id='combatTable-Body'>
+				{tableData
+					? tableData.map((char) => (
+							<TableRow
+								key={char.key}
+								init={char.init}
+								name={char.name}
+								armr={char.armr}
+								dmge={char.dmge}
+								hlth={char.hlth}
+								changed={handleValueChange}
+								healed={() => handleHealthButton(char.key)}
+								attacked={() => handleDmgeButton(char.key)}
+								killed={() => handleDeathButton(char.key)}
+							/>
+					  ))
+					: null}
+			</tbody>
 		</table>
 	);
 };

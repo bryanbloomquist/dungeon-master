@@ -3,6 +3,8 @@ import Firebase from "./Firebase";
 
 const db = Firebase.firestore();
 
+const keygen = require("keygenerator");
+
 const Context = React.createContext({});
 
 const Provider = ({ children }) => {
@@ -130,6 +132,7 @@ const Provider = ({ children }) => {
 		name: "",
 		armr: "",
 		hlth: "",
+		key: "",
 	});
 
 	const npcChangeHandler = (event) => setNpcSelected(event.value);
@@ -141,20 +144,22 @@ const Provider = ({ children }) => {
 		if (npcSelected && numSelected) {
 			const tempArr = [...monsterStatsArray];
 			const selectedNPC = tempArr.filter((el) => el.index === npcSelected);
-			console.log(selectedNPC);
 			const newMonsterDext = selectedNPC[0].dexterity;
 			const newMonsterInit = rollInitiative(newMonsterDext);
 			const newMonsterName = selectedNPC[0].name;
 			const newMonsterArmr = selectedNPC[0].armor_class;
 			const newMonsterHlth = selectedNPC[0].hit_points;
+			const newMonsterKey = keygen.session_id();
 			const newMonster = {
 				init: newMonsterInit,
 				name: newMonsterName,
 				armr: newMonsterArmr,
 				hlth: newMonsterHlth,
+				dmge: newMonsterHlth,
+				key: newMonsterKey,
 			};
 			// setAddMonster(newMonster);
-			addToTable(newMonster);
+			addToTableData(newMonster);
 			setAddMonster(newMonster);
 		}
 	};
@@ -165,6 +170,7 @@ const Provider = ({ children }) => {
 	const [charInit, setCharInit] = useState("");
 	const [charArmr, setCharArmr] = useState("");
 	const [charHlth, setCharHlth] = useState("");
+	const [charDmge, setCharDmge] = useState("");
 	const [charStat, setCharStat] = useState({});
 
 	const handleCharNameChange = (event) => setCharName(event.target.value);
@@ -173,7 +179,10 @@ const Provider = ({ children }) => {
 
 	const handleCharArmrChange = (event) => setCharArmr(event.target.value);
 
-	const handleCharHlthChange = (event) => setCharHlth(event.target.value);
+	const handleCharHlthChange = (event) => {
+		setCharHlth(event.target.value);
+		setCharDmge(event.target.value);
+	};
 
 	const addNewChar = () => {
 		console.log("***FUNC*** addNewChar");
@@ -183,8 +192,10 @@ const Provider = ({ children }) => {
 				name: charName,
 				armr: parseInt(charArmr),
 				hlth: parseInt(charHlth),
+				dmge: parseInt(charDmge),
+				key: keygen.session_id(),
 			};
-			addToTable(newCharacter);
+			addToTableData(newCharacter);
 			setCharStat(newCharacter);
 		}
 	};
@@ -192,47 +203,49 @@ const Provider = ({ children }) => {
 	// *** Combat Table *** //
 
 	const [tableData, setTableData] = useState([]);
+	const [healthValue, setHealthValue] = useState(0);
 
 	const loadTable = () => {
 		console.log("***FUNC*** loadTable");
-	};
-
-	const addToTable = (newEntry) => {
-		console.log("***FUNC*** addToTable");
-		// setAddMonster(newEntry);
 		db.collection("table__groups")
 			.doc(groupName)
 			.get()
 			.then((doc) => {
 				let arr1 = doc.data().table__data;
 				let arr2 = arr1 ? [...JSON.parse(arr1)] : [];
-				for (let i = 0; i < numSelected; i++) {
-					arr2.push(newEntry);
-				}
-				console.log(arr2);
-				const finalArr = sortTable(arr2);
-				setTableData(finalArr);
-				updateTable(finalArr);
+				setTableData(arr2);
 			});
 	};
 
-	const updateTable = (arr2) => {
-		console.log("***FUNC*** updateTable");
-		console.log(arr2);
-		db.collection("table__groups")
-			.doc(groupName)
-			.set({ table__data: JSON.stringify(arr2) });
+	const addToTableData = (newEntry) => {
+		console.log("***FUNC*** addToTableData");
+		const tempArr = [...tableData];
+		for (let i = 0; i < numSelected; i++) {
+			const singleMonster = { ...newEntry };
+			singleMonster.key = keygen.session_id();
+			tempArr.push(singleMonster);
+		}
+		const finalArr = sortTableData(tempArr);
+		setTableData(finalArr);
+		updateTableData(finalArr);
+		setNumSelected(1);
+		setCharName("");
 	};
 
-	// useEffect(() => {
-	const sortTable = (arr) => {
-		console.log("***FUNC*** sortTable");
+	const updateTableData = (newData) => {
+		console.log("***FUNC*** updateTableData");
+		setTableData(newData);
+		db.collection("table__groups")
+			.doc(groupName)
+			.set({ table__data: JSON.stringify(newData) });
+	};
+
+	const sortTableData = (arr) => {
+		console.log("***FUNC*** sortTableData");
 		let unsorted = [...arr];
 		unsorted.sort((a, b) => parseFloat(b.init) - parseFloat(a.init));
 		return unsorted;
 	};
-	// 	sortTable();
-	// }, []);
 
 	const rollInitiative = (dex) => {
 		console.log("***FUNC*** rollInitiative");
@@ -271,13 +284,42 @@ const Provider = ({ children }) => {
 		return initiative;
 	};
 
+	const handleValueChange = (event) => setHealthValue(event.target.value);
+
+	const handleHealthButton = (target) => {
+		console.log("***FUNC*** handleHealthButton");
+		let tableArray = [...tableData];
+		let index = tableArray.map((e) => e.key).indexOf(target);
+		let update = tableArray[index];
+		update.dmge = parseInt(update.dmge) + parseInt(healthValue);
+		tableArray[index] = update;
+		updateTableData(tableArray);
+	};
+
+	const handleDmgeButton = (target) => {
+		console.log("***FUNC*** handleDmgeButton");
+		let tableArray = [...tableData];
+		let index = tableArray.map((e) => e.key).indexOf(target);
+		let update = tableArray[index];
+		update.dmge = parseInt(update.dmge) - parseInt(healthValue);
+		tableArray[index] = update;
+		updateTableData(tableArray);
+	};
+
+	const handleDeathButton = (target) => {
+		console.log("***FUNC*** handleDeathButton");
+		let tableArray = [...tableData];
+		let index = tableArray.map((e) => e.key).indexOf(target);
+		tableArray.splice(index, 1);
+		updateTableData(tableArray);
+	};
+
 	return (
 		<Context.Provider
 			value={{
 				monsterNamesArray,
 				monsterStatsArray,
 				monsterOptions,
-				fetchFirestore,
 				groupName,
 				groupExst,
 				nameEntrd,
@@ -292,7 +334,6 @@ const Provider = ({ children }) => {
 				npcSelected,
 				numSelected,
 				addMonster,
-				tableData,
 				npcChangeHandler,
 				numChangeHandler,
 				loadMonsterStats,
@@ -306,6 +347,12 @@ const Provider = ({ children }) => {
 				handleCharArmrChange,
 				handleCharHlthChange,
 				addNewChar,
+				tableData,
+				healthValue,
+				handleValueChange,
+				handleHealthButton,
+				handleDmgeButton,
+				handleDeathButton,
 			}}
 		>
 			{children}

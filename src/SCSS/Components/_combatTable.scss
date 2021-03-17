@@ -1,10 +1,28 @@
 .combatTable {
-	color: $color-white;
+	color: $color-black;
+	background-color: $shadow-white;
 	flex: 1;
+	border-spacing: 0;
 	&__header {
+		color: $color-yellow;
 		background-color: $color-black;
 		& th {
 			padding: 1rem;
 		}
+	}
+	& button {
+		width: 6rem;
+		color: $color-white;
+		display: block;
+		margin: 0 auto;
+	}
+	& .healBtn {
+		background-color: $color-green;
+	}
+	& .dmgeBtn {
+		background-color: $color-red;
+	}
+	& .deadBtn {
+		background-color: $color-black;
 	}
 }
