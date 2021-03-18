@@ -1,20 +1,42 @@
 .combatTable {
 	color: $color-black;
 	background-color: $shadow-white;
-	flex: 1;
 	border-spacing: 0;
+	width: 100%;
+	text-align: center;
+	&__container {
+		overflow-x: auto;
+		width: 100%;
+		@include respond(tablet) {
+			flex: 1;
+		}
+	}
 	&__header {
 		color: $color-yellow;
 		background-color: $color-black;
 		& th {
-			padding: 1rem;
+			padding: 1rem 0rem;
 		}
+	}
+	& tr :not(:nth-child(1)) {
+		border-left: 1px solid;
+	}
+	& tr :nth-child(4) {
+		width: 12rem;
+	}
+	& tr :nth-child(5) {
+		width: 12rem;
+	}
+	& tr :not(:nth-child(-n + 5)) {
+		width: 8rem;
+	}
+	& input {
+		width: 10rem;
+		padding: 1rem 0rem;
 	}
 	& button {
 		width: 6rem;
 		color: $color-white;
-		display: block;
-		margin: 0 auto;
 	}
 	& .healBtn {
 		background-color: $color-green;
