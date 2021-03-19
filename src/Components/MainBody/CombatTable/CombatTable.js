@@ -9,9 +9,10 @@ const CombatTable = () => {
 		handleHealthButton,
 		handleDmgeButton,
 		handleDeathButton,
+		handleLoadStats,
 	} = useContext(Context);
 	return (
-		<div class='combatTable__container'>
+		<div className='combatTable__container'>
 			<table className='combatTable' id='combatTable'>
 				<thead className='combatTable__header'>
 					<tr>
@@ -39,6 +40,7 @@ const CombatTable = () => {
 									healed={() => handleHealthButton(char.key)}
 									attacked={() => handleDmgeButton(char.key)}
 									killed={() => handleDeathButton(char.key)}
+									loadStats={() => handleLoadStats(char.name)}
 								/>
 						  ))
 						: null}

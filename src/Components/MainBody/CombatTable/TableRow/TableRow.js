@@ -5,7 +5,7 @@ const TableRow = (props) => {
 	return (
 		<tr>
 			<td>{props.init}</td>
-			<td>{props.name}</td>
+			<td onClick={props.loadStats}>{props.name}</td>
 			<td>{props.armr}</td>
 			<td>
 				{props.dmge}/{props.hlth}

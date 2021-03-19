@@ -314,6 +314,24 @@ const Provider = ({ children }) => {
 		updateTableData(tableArray);
 	};
 
+	// *** Modal *** //
+
+	const [showModal, setShowModal] = useState(false);
+	const [monsterManual, setMonsterManual] = useState({});
+
+	const handleLoadStats = (target) => {
+		const monster = monsterNamesArray.map((e) => e.name).indexOf(target);
+		if (monster > -1) {
+			const bool = !showModal;
+			setMonsterManual(monsterStatsArray[monster]);
+			setShowModal(bool);
+		}
+	};
+
+	const closeModal = () => {
+		setShowModal(false);
+	};
+
 	return (
 		<Context.Provider
 			value={{
@@ -353,6 +371,10 @@ const Provider = ({ children }) => {
 				handleHealthButton,
 				handleDmgeButton,
 				handleDeathButton,
+				showModal,
+				monsterManual,
+				handleLoadStats,
+				closeModal,
 			}}
 		>
 			{children}

@@ -6,6 +6,7 @@ import Confirm from "./Components/Login/Confirm/Confirm";
 import MainBody from "./Components/MainBody/MainBody";
 import Sidebar from "./Components/MainBody/Sidebar/Sidebar";
 import CombatTable from "./Components/MainBody/CombatTable/CombatTable";
+import Modal from "./Components/Modal/Modal";
 
 import "./SCSS/main.scss";
 
@@ -19,6 +20,7 @@ const App = () => {
 				<Sidebar />
 				<CombatTable />
 			</MainBody>
+			<Modal />
 		</Provider>
 	);
 };
