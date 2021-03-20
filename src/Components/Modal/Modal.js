@@ -3,23 +3,21 @@ import { Context } from "../../AppContext";
 import Aux from "../../HOC/Aux";
 import Backdrop from "../Backdrop/Backdrop";
 import styled from "styled-components";
+import ModalContent from "./ModalContent/ModalContent";
 
 const StyledModal = styled.div`
 	position: fixed;
 	z-index: 500;
 	background-color: white;
-	width: 70%;
+	width: 90%;
+	height: 90%;
 	border: 1px solid #ccc;
 	box-shadow: 1px 1px 1px black;
 	padding: 16px;
-	left: 15%;
-	top: 30%;
+	left: 5%;
+	top: 5%;
 	box-sizing: border-box;
 	transition: all 0.6s ease-out;
-	@media (min-width: 600px) {
-		width: 500px;
-		left: calc(50% - 250px);
-	}
 `;
 
 const Modal = React.memo((props) => {
@@ -34,7 +32,7 @@ const Modal = React.memo((props) => {
 					opacity: showModal ? "1" : "0",
 				}}
 			>
-				{props.children}
+				<ModalContent />
 			</StyledModal>
 		</Aux>
 	);
