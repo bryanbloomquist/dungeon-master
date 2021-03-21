@@ -8,6 +8,12 @@ const Title = styled.h2`
 	margin-bottom: 1rem;
 `;
 
+const Sub = styled.p`
+	font-size: 1.8rem;
+	font-style: italic;
+	color: #666666;
+`;
+
 const Row = styled.div`
 	margin-bottom: 0.5rem;
 	display: flex;
@@ -22,154 +28,180 @@ const Attr = styled.span`
 `;
 
 const Data = styled.span`
-	font-size: 2.4rem;
-	margin: 0 2rem 0 0.5rem;
+	font-size: 1.8rem;
 	text-transform: capitalize;
 	color: #c41520;
 `;
 
+const HR = styled.hr`
+	margin: 1rem 0;
+	border: 2px solid #ffbf00;
+`;
+
+const UL = styled.ul`
+	display: flex;
+	flex-wrap: wrap;
+`;
+
+const LI = styled.li`
+	margin-right: 3px;
+	list-style: none;
+`;
+
 const ModalContent = () => {
-	const { monsterManual } = useContext(Context);
+	const { monsterManual, monsterLoaded } = useContext(Context);
 	const stats = { ...monsterManual };
 	return (
-		<Aux>
-			<Title>{stats.name}</Title>
-			{/* Alignment / Type / Subtype / Size / CR / XP */}
-			<Row>
-				<Attr>
-					Alignment:<Data>{stats.alignment}</Data>
-				</Attr>
-				<Attr>
-					Type:<Data>{stats.type}</Data>
-				</Attr>
-				{stats.subtype ? (
+		monsterLoaded && (
+			<Aux>
+				<Title>{stats.name}</Title>
+				<Sub>
+					{stats.size}&nbsp;
+					{stats.type}
+					{stats.subtype ? " (" + stats.subtype + ")" : null},&nbsp;
+					{stats.alignment}
+				</Sub>
+				<HR />
+				{/* Armor Class / Hit Points / Hit Dice */}
+				<Row>
 					<Attr>
-						Subtype:<Data>{stats.subtype}</Data>
+						Armor Class: <Data>{stats.armor_class}</Data>
 					</Attr>
-				) : null}
-				<Attr>
-					Size:<Data>{stats.size}</Data>
-				</Attr>
-				<Attr>
-					CR:<Data>{stats.challenge_rating}</Data>
-				</Attr>
-				<Attr>
-					XP:<Data>{stats.xp}</Data>
-				</Attr>
-			</Row>
-			{/* Armor Class / Hit Points / Hit Dice */}
-			<Row>
-				<Attr>
-					AC:<Data>{stats.armor_class}</Data>
-				</Attr>
-				<Attr>
-					HP:<Data>{stats.hit_points}</Data>
-				</Attr>
-				<Attr>
-					Hit Dice:<Data>{stats.hit_dice}</Data>
-				</Attr>
-			</Row>
-			{/* STR / CON / DEX / INT / WIS / CHA */}
-			<Row>
-				<Attr>
-					STR:<Data>{stats.strength}</Data>
-				</Attr>
-				<Attr>
-					CON:<Data>{stats.constitution}</Data>
-				</Attr>
-				<Attr>
-					DEX:<Data>{stats.dexterity}</Data>
-				</Attr>
-				<Attr>
-					INT:<Data>{stats.intelligence}</Data>
-				</Attr>
-				<Attr>
-					WIS:<Data>{stats.wisdom}</Data>
-				</Attr>
-				<Attr>
-					CHA:<Data>{stats.charisma}</Data>
-				</Attr>
-			</Row>
-			{/* Speed */}
-			{stats.speed ? (
+				</Row>
+				<Row>
+					<Attr>
+						hit points:&nbsp;
+						<Data>
+							{stats.hit_points} ({stats.hit_dice})
+						</Data>
+					</Attr>
+				</Row>
+				{/* Speed */}
 				<Row>
 					<Attr>
 						Speed:&nbsp;
-						{stats.speed.walk ? (
-							<Attr>
-								walk -<Data>{stats.speed.walk}</Data>
-							</Attr>
-						) : null}
-						{stats.speed.fly ? (
-							<Attr>
-								fly -<Data>{stats.speed.fly}</Data>
-							</Attr>
-						) : null}
-						{stats.speed.swim ? (
-							<Attr>
-								swim -<Data>{stats.speed.swim}</Data>
-							</Attr>
-						) : null}
+						{stats.speed.walk && <Data>walk {stats.speed.walk}</Data>}
+						&nbsp;&nbsp;
+						{stats.speed.fly && <Data>fly {stats.speed.fly}</Data>}&nbsp;&nbsp;
+						{stats.speed.swim && <Data>swim {stats.speed.swim}</Data>}
 					</Attr>
 				</Row>
-			) : null}
-			{/* Proficiencies */}
-			{stats.proficiencies ? (
+				<HR />
+				{/* STR / CON / DEX / INT / WIS / CHA */}
 				<Row>
-					{stats.proficiencies.map((el) => (
-						<span>
-							<Attr key={el.proficiency.name}>
-								{el.proficiency.name}
-								<Data>+{el.value}</Data>
-							</Attr>
-						</span>
-					))}
+					<Attr>
+						STR: <Data>{stats.strength}</Data>&nbsp;
+					</Attr>
+					<Attr>
+						CON: <Data>{stats.constitution}</Data>&nbsp;
+					</Attr>
+					<Attr>
+						DEX: <Data>{stats.dexterity}</Data>&nbsp;
+					</Attr>
+					<Attr>
+						INT: <Data>{stats.intelligence}</Data>&nbsp;
+					</Attr>
+					<Attr>
+						WIS: <Data>{stats.wisdom}</Data>&nbsp;
+					</Attr>
+					<Attr>
+						CHA: <Data>{stats.charisma}</Data>
+					</Attr>
 				</Row>
-			) : null}
-			<Row>
+				<HR />
+				{/* Proficiencies */}
+				{stats.proficiencies.length > 0 && (
+					<Row>
+						<Attr>
+							Savings Throws & Proficiencies:&nbsp;
+							{stats.proficiencies.map((el) => (
+								<Data>
+									{el.proficiency.name}+{el.value}&nbsp;
+								</Data>
+							))}
+						</Attr>
+					</Row>
+				)}
 				{/* Damage Vulnerablities */}
-				<Attr>
-					Damage Vulnerablities:
-					<Data>
-						{stats.damage_vulnerabilities &&
-						stats.damage_vulnerabilities.length > 0
-							? stats.damage_vulnerabilities.join(", ")
-							: "None"}
-					</Data>
-				</Attr>
+				{stats.damage_vulnerabilities.length > 0 && (
+					<Row>
+						<Attr>
+							damage vulnerabilities:
+							<Data> {stats.damage_vulnerabilities.join(", ")}</Data>
+						</Attr>
+					</Row>
+				)}
 				{/* Damage Resistances */}
-				<Attr>
-					Damage Resistances:
-					<Data>
-						{stats.damage_resistances && stats.damage_resistances.length > 0
-							? stats.damage_resistances.join(", ")
-							: "None"}
-					</Data>
-				</Attr>
+				{stats.damage_resistances.length > 0 && (
+					<Row>
+						<Attr>
+							damage resistances:
+							<Data> {stats.damage_resistances.join(", ")}</Data>
+						</Attr>
+					</Row>
+				)}
 				{/* Damage Immunities */}
-				<Attr>
-					Damage Immunities:
-					<Data>
-						{stats.damage_immunities && stats.damage_immunities.length > 0
-							? stats.damage_immunities.join(", ")
-							: "None"}
-					</Data>
-				</Attr>
+				{stats.damage_immunities.length > 0 && (
+					<Row>
+						<Attr>
+							damage immunities:
+							<Data> {stats.damage_immunities.join(", ")}</Data>
+						</Attr>
+					</Row>
+				)}
 				{/* Condition Immunities */}
-				<Attr>
-					Condition Immunities:
-					<Data>
-						{stats.condition_immunities && stats.condition_immunities.length > 0
-							? stats.condition_immunities.join(", ")
-							: "None"}
-					</Data>
-				</Attr>
-			</Row>
-			{/* Senses */}
-			{/* <Row>
-				<Attr>Senses:</Attr>
-			</Row> */}
-		</Aux>
+				{stats.condition_immunities.length > 0 && (
+					<Row>
+						<Attr>
+							condition immunities:&nbsp;
+							<Data>
+								{stats.condition_immunities.map((cond, i) => {
+									return i > 0 ? ", " + cond.index : cond.index;
+								})}
+							</Data>
+						</Attr>
+					</Row>
+				)}
+				{/* Senses */}
+				<Row>
+					<Attr>
+						Senses:&nbsp;
+						<Data>Passive Perception {stats.senses.passive_perception}, </Data>
+						{stats.senses.darkvision && (
+							<Data>darkvision {stats.senses.darkvision}, </Data>
+						)}
+						{stats.senses.blindsight && (
+							<Data>blindsight {stats.senses.blindsight}, </Data>
+						)}
+						{stats.senses.truesight && (
+							<Data>truesight {stats.senses.truesight}, </Data>
+						)}
+						{stats.senses.tremorsense && (
+							<Data>tremorsense {stats.senses.tremorsense}, </Data>
+						)}
+					</Attr>
+				</Row>
+				{/* Languages */}
+				{stats.languages.length > 0 && (
+					<Row>
+						<Attr>
+							languages:&nbsp;
+							<Data>{stats.languages}</Data>
+						</Attr>
+					</Row>
+				)}
+				{/* Challenge Rating / Experience Points */}
+				<Row>
+					<Attr>
+						Challenge Rating:&nbsp;
+						<Data>
+							{stats.challenge_rating} ({stats.xp}XP)
+						</Data>
+					</Attr>
+				</Row>
+				<HR />
+			</Aux>
+		)
 	);
 };
 

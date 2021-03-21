@@ -62,8 +62,8 @@ const Provider = ({ children }) => {
 				.doc(groupName)
 				.get()
 				.then((doc) => (doc.exists ? setGroupExst(true) : null));
+			setNameEntrd(true);
 		}
-		setNameEntrd(true);
 	};
 
 	const handleGroupVerify = (el) => {
@@ -317,12 +317,14 @@ const Provider = ({ children }) => {
 	// *** Modal *** //
 
 	const [showModal, setShowModal] = useState(false);
+	const [monsterLoaded, setMonsterLoaded] = useState(false);
 	const [monsterManual, setMonsterManual] = useState({});
 
 	const handleLoadStats = (target) => {
 		const monster = monsterNamesArray.map((e) => e.name).indexOf(target);
 		if (monster > -1) {
 			const bool = !showModal;
+			setMonsterLoaded(bool);
 			setMonsterManual(monsterStatsArray[monster]);
 			setShowModal(bool);
 		}
@@ -373,6 +375,7 @@ const Provider = ({ children }) => {
 				handleDeathButton,
 				showModal,
 				monsterManual,
+				monsterLoaded,
 				handleLoadStats,
 				closeModal,
 			}}

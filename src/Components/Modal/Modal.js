@@ -17,7 +17,12 @@ const StyledModal = styled.div`
 	left: 5%;
 	top: 5%;
 	box-sizing: border-box;
+	overflow-y: auto;
 	transition: all 0.6s ease-out;
+	@media only screen and (min-width: 600px) {
+		width: 600px;
+		left: calc(50% - 300px);
+	}
 `;
 
 const Modal = React.memo((props) => {
