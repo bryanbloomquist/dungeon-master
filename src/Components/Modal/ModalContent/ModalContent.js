@@ -33,19 +33,16 @@ const Data = styled.span`
 	color: #c41520;
 `;
 
+const Desc = styled.span`
+	font-family: serif;
+	font-style: italic;
+	text-transform: none;
+	color: #666666;
+`;
+
 const HR = styled.hr`
 	margin: 1rem 0;
 	border: 2px solid #ffbf00;
-`;
-
-const UL = styled.ul`
-	display: flex;
-	flex-wrap: wrap;
-`;
-
-const LI = styled.li`
-	margin-right: 3px;
-	list-style: none;
 `;
 
 const ModalContent = () => {
@@ -200,6 +197,62 @@ const ModalContent = () => {
 					</Attr>
 				</Row>
 				<HR />
+				{/* Special Abilities */}
+				{stats.special_abilities && stats.special_abilities.length > 0 && (
+					<div>
+						<Row>
+							{stats.special_abilities.map((ability) => {
+								return (
+									<Attr>
+										<Data>{ability.name}: </Data>
+										<Desc>{ability.desc}</Desc>
+									</Attr>
+								);
+							})}
+						</Row>
+						<HR />
+					</div>
+				)}
+				{/* Actions */}
+				<Row>
+					<Attr>Actions:</Attr>
+				</Row>
+				<Row>
+					{stats.actions.map((action) => {
+						return (
+							<Attr key={action.name}>
+								<Data>{action.name}: </Data>
+								<Desc>{action.desc}</Desc>
+							</Attr>
+						);
+					})}
+				</Row>
+				{/* Legendary Actions */}
+				{stats.legendary_actions && (
+					<div>
+						<HR />
+						<Row>
+							<Attr>Legendary Actions</Attr>
+							<Desc>
+								This creature can take 3 legendary actions, choosing from the
+								options below. Only one legendary action option can be used at a
+								time and only at the end of another creature's turn. The
+								creature regains spent legendary actions at the start of its
+								turn.
+							</Desc>
+						</Row>
+						<Row>
+							{stats.legendary_actions.map((action) => {
+								return (
+									<Attr key={action.name}>
+										<Data>{action.name}: </Data>
+										<Desc>{action.desc}</Desc>
+									</Attr>
+								);
+							})}
+						</Row>
+					</div>
+				)}
 			</Aux>
 		)
 	);
