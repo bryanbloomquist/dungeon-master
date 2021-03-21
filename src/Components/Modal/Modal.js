@@ -3,14 +3,15 @@ import { Context } from "../../AppContext";
 import Aux from "../../HOC/Aux";
 import Backdrop from "../Backdrop/Backdrop";
 import styled from "styled-components";
-import ModalContent from "./ModalContent/ModalContent";
+import MonsterModalContent from "./ModalContent/MonsterModalContent";
+import InitiativeModalContent from "./ModalContent/InitiativeModalContent";
 
 const StyledModal = styled.div`
 	position: fixed;
 	z-index: 500;
 	background-color: white;
 	width: 90%;
-	height: 90%;
+	max-height: 90%;
 	border: 1px solid #ccc;
 	box-shadow: 1px 1px 1px black;
 	padding: 16px;
@@ -26,7 +27,7 @@ const StyledModal = styled.div`
 `;
 
 const Modal = React.memo((props) => {
-	const { showModal, closeModal } = useContext(Context);
+	const { showModal, closeModal, isMonsterManual } = useContext(Context);
 
 	return (
 		<Aux>
@@ -37,7 +38,7 @@ const Modal = React.memo((props) => {
 					opacity: showModal ? "1" : "0",
 				}}
 			>
-				<ModalContent />
+				{isMonsterManual ? <MonsterModalContent /> : <InitiativeModalContent />}
 			</StyledModal>
 		</Aux>
 	);

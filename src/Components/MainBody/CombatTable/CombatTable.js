@@ -5,6 +5,7 @@ import TableRow from "./TableRow/TableRow";
 const CombatTable = () => {
 	const {
 		tableData,
+		handleInitUpdate,
 		handleValueChange,
 		handleHealthButton,
 		handleDmgeButton,
@@ -31,6 +32,8 @@ const CombatTable = () => {
 						? tableData.map((char) => (
 								<TableRow
 									key={char.key}
+									type={char.type}
+									update={() => handleInitUpdate(char.key)}
 									init={char.init}
 									name={char.name}
 									armr={char.armr}

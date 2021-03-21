@@ -4,18 +4,20 @@ import Button from "../../../Button/Button";
 const TableRow = (props) => {
 	return (
 		<tr>
-			<td>{props.init}</td>
+			<td>
+				{props.type === "player" ? (
+					<Button class='initBtn' clicked={props.update} title={props.init} />
+				) : (
+					props.init
+				)}
+			</td>
 			<td onClick={props.loadStats}>{props.name}</td>
 			<td>{props.armr}</td>
 			<td>
 				{props.dmge}/{props.hlth}
 			</td>
 			<td>
-				<input
-					type='number'
-					onChange={props.changed}
-					// value={props.value}
-				/>
+				<input type='number' onChange={props.changed} />
 			</td>
 			<td>
 				<Button

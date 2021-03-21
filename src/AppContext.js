@@ -150,6 +150,7 @@ const Provider = ({ children }) => {
 				armr: newMonsterArmr,
 				hlth: newMonsterHlth,
 				dmge: newMonsterHlth,
+				type: "monster",
 				key: newMonsterKey,
 			};
 			// setAddMonster(newMonster);
@@ -186,6 +187,7 @@ const Provider = ({ children }) => {
 				armr: parseInt(charArmr),
 				hlth: parseInt(charHlth),
 				dmge: parseInt(charDmge),
+				type: "player",
 				key: keygen.session_id(),
 			};
 			addToTableData(newCharacter);
@@ -299,16 +301,45 @@ const Provider = ({ children }) => {
 		updateTableData(tableArray);
 	};
 
+	// *** Change Initiative Value *** //
+
+	const [newInitValue, setNewInitValue] = useState(0);
+	const [updateInitTarget, setUpdateInitTarget] = useState("");
+
+	const handleInitUpdate = (target) => {
+		console.log(target);
+		setUpdateInitTarget(target);
+		setIsMonsterManual(false);
+		const bool = !showModal;
+		setShowModal(bool);
+	};
+
+	const handleNewInit = (event) => setNewInitValue(event.target.value);
+
+	const submitNewInit = () => {
+		console.log(newInitValue);
+		let tableArray = [...tableData];
+		let index = tableArray.map((e) => e.key).indexOf(updateInitTarget);
+		let update = tableArray[index];
+		update.init = parseInt(newInitValue);
+		tableArray[index] = update;
+		let finalArray = sortTableData(tableArray);
+		updateTableData(finalArray);
+		setShowModal(false);
+	};
+
 	// *** Modal *** //
 
 	const [showModal, setShowModal] = useState(false);
 	const [monsterLoaded, setMonsterLoaded] = useState(false);
+	const [isMonsterManual, setIsMonsterManual] = useState(true);
 	const [monsterManual, setMonsterManual] = useState({});
 
 	const handleLoadStats = (target) => {
 		const monster = monsterNamesArray.map((e) => e.name).indexOf(target);
 		if (monster > -1) {
 			const bool = !showModal;
+			setIsMonsterManual(true);
 			setMonsterLoaded(bool);
 			setMonsterManual(monsterStatsArray[monster]);
 			setShowModal(bool);
@@ -358,8 +389,14 @@ const Provider = ({ children }) => {
 				handleHealthButton,
 				handleDmgeButton,
 				handleDeathButton,
+				newInitValue,
+				setNewInitValue,
+				handleInitUpdate,
+				handleNewInit,
+				submitNewInit,
 				showModal,
 				monsterManual,
+				isMonsterManual,
 				monsterLoaded,
 				handleLoadStats,
 				closeModal,

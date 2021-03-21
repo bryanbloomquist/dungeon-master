@@ -38,6 +38,10 @@
 		width: 6rem;
 		color: $color-white;
 	}
+	& .initBtn {
+		background-color: $color-gray-light;
+		color: $color-black;
+	}
 	& .healBtn {
 		background-color: $color-green;
 	}

@@ -9,7 +9,6 @@ const Title = styled.h2`
 `;
 
 const Sub = styled.p`
-	font-size: 1.8rem;
 	font-style: italic;
 	color: #666666;
 `;
@@ -22,13 +21,11 @@ const Row = styled.div`
 `;
 
 const Attr = styled.span`
-	font-size: 1.8rem;
 	text-transform: uppercase;
 	margin-right: 0.5rem;
 `;
 
 const Data = styled.span`
-	font-size: 1.8rem;
 	text-transform: capitalize;
 	color: #c41520;
 `;
@@ -45,7 +42,7 @@ const HR = styled.hr`
 	border: 2px solid #ffbf00;
 `;
 
-const ModalContent = () => {
+const MonsterModalContent = () => {
 	const { monsterManual, monsterLoaded } = useContext(Context);
 	const stats = { ...monsterManual };
 	return (
@@ -110,12 +107,19 @@ const ModalContent = () => {
 				{stats.proficiencies.length > 0 && (
 					<Row>
 						<Attr>
-							Savings Throws & Proficiencies:&nbsp;
-							{stats.proficiencies.map((el) => (
-								<Data>
-									{el.proficiency.name}+{el.value}&nbsp;
-								</Data>
-							))}
+							Savings Throws & Skills:&nbsp;
+							{stats.proficiencies.map((el, i) => {
+								const name = el.proficiency.name;
+								const save = name.includes("Saving Throw:");
+								const skll = name.includes("Skill:");
+								return (
+									<Data key={name}>
+										{i > 0 && ", "}
+										{save && name.replace("Saving Throw: ", "")}
+										{skll && name.replace("Skill: ", "")}+{el.value}
+									</Data>
+								);
+							})}
 						</Attr>
 					</Row>
 				)}
@@ -203,7 +207,7 @@ const ModalContent = () => {
 						<Row>
 							{stats.special_abilities.map((ability) => {
 								return (
-									<Attr>
+									<Attr key={ability.name}>
 										<Data>{ability.name}: </Data>
 										<Desc>{ability.desc}</Desc>
 									</Attr>
@@ -258,4 +262,4 @@ const ModalContent = () => {
 	);
 };
 
-export default ModalContent;
+export default MonsterModalContent;
