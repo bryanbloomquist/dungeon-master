@@ -15,7 +15,6 @@ const Provider = ({ children }) => {
 	const [monsterOptions, setMonsterOptions] = useState([]);
 
 	const fetchFirestore = () => {
-		console.log("***FUNC*** fechFirestore");
 		db.collection("srd__monsters")
 			.doc("monster__names")
 			.get()
@@ -35,7 +34,6 @@ const Provider = ({ children }) => {
 	};
 
 	const createMonsterOptions = () => {
-		console.log("***FUNC*** createMonsterOptions");
 		let arr1 = [...monsterNamesArray];
 		let arr2 = [];
 		arr1.forEach((el) => arr2.push({ label: el.name, value: el.index }));
@@ -56,7 +54,6 @@ const Provider = ({ children }) => {
 	const handleGroupChange = (event) => setGroupName(event.target.value);
 
 	const handleLoginSubmit = () => {
-		console.log("***FUNC*** handleLoginSubmit");
 		if (groupName) {
 			db.collection("table__groups")
 				.doc(groupName)
@@ -67,7 +64,6 @@ const Provider = ({ children }) => {
 	};
 
 	const handleGroupVerify = (el) => {
-		console.log("***FUNC*** handleGroupVerify");
 		const choice = el.target.value;
 		const exists = groupExst;
 		if (choice === "yes" && exists === true) {
@@ -94,7 +90,6 @@ const Provider = ({ children }) => {
 	const [showPc, setShowPc] = useState(false);
 
 	const sidebarHandler = (e) => {
-		console.log("***FUNC*** sidebarHandler");
 		const target = e.target.value;
 		let boolean;
 		switch (target) {
@@ -140,7 +135,6 @@ const Provider = ({ children }) => {
 	const numChangeHandler = (event) => setNumSelected(event.target.value);
 
 	const loadMonsterStats = () => {
-		console.log("***FUNC*** loadMonsterStats");
 		if (npcSelected && numSelected) {
 			const tempArr = [...monsterStatsArray];
 			const selectedNPC = tempArr.filter((el) => el.index === npcSelected);
@@ -185,7 +179,6 @@ const Provider = ({ children }) => {
 	};
 
 	const addNewChar = () => {
-		console.log("***FUNC*** addNewChar");
 		if (charName && charInit && charArmr && charHlth) {
 			const newCharacter = {
 				init: parseInt(charInit),
@@ -206,7 +199,6 @@ const Provider = ({ children }) => {
 	const [healthValue, setHealthValue] = useState(0);
 
 	const loadTable = () => {
-		console.log("***FUNC*** loadTable");
 		db.collection("table__groups")
 			.doc(groupName)
 			.get()
@@ -218,7 +210,6 @@ const Provider = ({ children }) => {
 	};
 
 	const addToTableData = (newEntry) => {
-		console.log("***FUNC*** addToTableData");
 		const tempArr = [...tableData];
 		for (let i = 0; i < numSelected; i++) {
 			const singleMonster = { ...newEntry };
@@ -233,7 +224,6 @@ const Provider = ({ children }) => {
 	};
 
 	const updateTableData = (newData) => {
-		console.log("***FUNC*** updateTableData");
 		setTableData(newData);
 		db.collection("table__groups")
 			.doc(groupName)
@@ -241,14 +231,12 @@ const Provider = ({ children }) => {
 	};
 
 	const sortTableData = (arr) => {
-		console.log("***FUNC*** sortTableData");
 		let unsorted = [...arr];
 		unsorted.sort((a, b) => parseFloat(b.init) - parseFloat(a.init));
 		return unsorted;
 	};
 
 	const rollInitiative = (dex) => {
-		console.log("***FUNC*** rollInitiative");
 		let initiative = Math.floor(Math.random() * 20) + 1;
 		if (dex === 1) {
 			initiative -= 5;
@@ -287,7 +275,6 @@ const Provider = ({ children }) => {
 	const handleValueChange = (event) => setHealthValue(event.target.value);
 
 	const handleHealthButton = (target) => {
-		console.log("***FUNC*** handleHealthButton");
 		let tableArray = [...tableData];
 		let index = tableArray.map((e) => e.key).indexOf(target);
 		let update = tableArray[index];
@@ -297,7 +284,6 @@ const Provider = ({ children }) => {
 	};
 
 	const handleDmgeButton = (target) => {
-		console.log("***FUNC*** handleDmgeButton");
 		let tableArray = [...tableData];
 		let index = tableArray.map((e) => e.key).indexOf(target);
 		let update = tableArray[index];
@@ -307,7 +293,6 @@ const Provider = ({ children }) => {
 	};
 
 	const handleDeathButton = (target) => {
-		console.log("***FUNC*** handleDeathButton");
 		let tableArray = [...tableData];
 		let index = tableArray.map((e) => e.key).indexOf(target);
 		tableArray.splice(index, 1);
