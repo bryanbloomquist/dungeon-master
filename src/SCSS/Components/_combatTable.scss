@@ -9,6 +9,7 @@
 		width: 100%;
 		@include respond(tablet) {
 			flex: 1;
+			overflow-x: hidden;
 		}
 	}
 	&__header {
@@ -18,8 +19,12 @@
 			padding: 1rem 0rem;
 		}
 	}
+	& tr:nth-child(odd) > td {
+		background-color: $shadow-black;
+		color: $color-white;
+	}
 	& tr :not(:nth-child(1)) {
-		border-left: 1px solid;
+		border-left: 1px solid $shadow-black-light;
 	}
 	& tr :nth-child(4) {
 		width: 12rem;
@@ -27,6 +32,7 @@
 	& tr :nth-child(5) {
 		width: 12rem;
 	}
+	& tr :nth-child(1),
 	& tr :not(:nth-child(-n + 5)) {
 		width: 8rem;
 	}
