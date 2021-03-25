@@ -17,6 +17,7 @@ const CombatTable = () => {
 			<table className='combatTable' id='combatTable'>
 				<thead className='combatTable__header'>
 					<tr>
+						<th>&nbsp;</th>
 						<th>Init.</th>
 						<th>Name</th>
 						<th>A.C.</th>

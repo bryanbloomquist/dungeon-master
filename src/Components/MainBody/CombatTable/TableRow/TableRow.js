@@ -1,17 +1,27 @@
 import React from "react";
 import Button from "../../../Button/Button";
+import * as Icon from "../../../Icons/Icons";
 
 const TableRow = (props) => {
 	return (
 		<tr>
 			<td>
 				{props.type === "player" ? (
-					<Button class='initBtn' clicked={props.update} title={props.init} />
+					<Button
+						class='initBtn'
+						clicked={props.update}
+						title={<Icon.Edit />}
+					/>
 				) : (
-					props.init
+					<Button
+						class='initBtn'
+						clicked={props.loadStats}
+						title={<Icon.Info />}
+					/>
 				)}
 			</td>
-			<td onClick={props.loadStats}>{props.name}</td>
+			<td>{props.init}</td>
+			<td>{props.name}</td>
 			<td>{props.armr}</td>
 			<td>
 				{props.dmge}/{props.hlth}
@@ -20,25 +30,17 @@ const TableRow = (props) => {
 				<input type='number' onChange={props.changed} />
 			</td>
 			<td>
-				<Button
-					class='healBtn'
-					clicked={props.healed}
-					title={<i className='fas fa-heart'></i>}
-				/>
+				<Button class='healBtn' clicked={props.healed} title={<Icon.Heart />} />
 			</td>
 			<td>
 				<Button
 					class='dmgeBtn'
 					clicked={props.attacked}
-					title={<i className='fas fa-heart-broken'></i>}
+					title={<Icon.Damage />}
 				/>
 			</td>
 			<td>
-				<Button
-					class='deadBtn'
-					clicked={props.killed}
-					title={<i className='fas fa-skull-crossbones'></i>}
-				/>
+				<Button class='deadBtn' clicked={props.killed} title={<Icon.Skull />} />
 			</td>
 		</tr>
 	);

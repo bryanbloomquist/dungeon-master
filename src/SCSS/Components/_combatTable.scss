@@ -32,8 +32,8 @@
 	& tr :nth-child(5) {
 		width: 12rem;
 	}
-	& tr :nth-child(1),
-	& tr :not(:nth-child(-n + 5)) {
+	& tr > :nth-child(1),
+	& tr > :not(:nth-child(-n + 5)) {
 		width: 8rem;
 	}
 	& input {
@@ -45,7 +45,6 @@
 		color: $color-white;
 	}
 	& .initBtn {
-		background-color: $color-gray-light;
 		color: $color-black;
 	}
 	& .healBtn {

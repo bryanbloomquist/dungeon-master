@@ -6,7 +6,7 @@ const InitiativeModalContent = () => {
 	return (
 		<div className='initiative_modal'>
 			<span>Enter new initiative value:</span>
-			<input onChange={handleNewInit} />
+			<input onChange={handleNewInit} type='number' min='-5' max='30' />
 			<button onClick={submitNewInit}>Submit</button>
 		</div>
 	);

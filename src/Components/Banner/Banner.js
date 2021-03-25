@@ -1,9 +1,10 @@
 import React from "react";
+import * as Icon from "../Icons/Icons";
 
 const banner = () => (
 	<div className='banner'>
 		<h1 className='banner__header'>
-			Dungeons <i className='fab fa-d-and-d fa-1x'></i> Dragons Game Screen
+			Dungeons <Icon.DND /> Dragons Game Screen
 		</h1>
 	</div>
 );
