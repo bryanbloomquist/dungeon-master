@@ -304,10 +304,20 @@ const Provider = ({ children }) => {
 	// *** Change Initiative Value *** //
 
 	const [newInitValue, setNewInitValue] = useState(0);
+	const [newArmrValue, setNewArmrValue] = useState(0);
+	const [newHlthValue, setNewHlthValue] = useState(0);
+	const [stats2Update, setStats2Update] = useState([]);
 	const [updateInitTarget, setUpdateInitTarget] = useState("");
 
-	const handleInitUpdate = (target) => {
+	const handleCharUpdate = (target) => {
 		console.log(target);
+		let tableArray = [...tableData];
+		let index = tableArray.map((e) => e.key).indexOf(target);
+		let update = tableArray[index];
+		setNewInitValue(parseInt(update.init));
+		setNewArmrValue(parseInt(update.armr));
+		setNewHlthValue(parseInt(update.hlth));
+		setStats2Update(tableArray[index]);
 		setUpdateInitTarget(target);
 		setIsMonsterManual(false);
 		const bool = !showModal;
@@ -316,13 +326,20 @@ const Provider = ({ children }) => {
 
 	const handleNewInit = (event) => setNewInitValue(event.target.value);
 
-	const submitNewInit = () => {
-		console.log(newInitValue);
+	const handleNewArmr = (event) => setNewArmrValue(event.target.value);
+
+	const handleNewHlth = (event) => setNewHlthValue(event.target.value);
+
+	const submitNewStats = () => {
+		let newCharStats = { ...stats2Update };
+		console.log(newCharStats);
+		newCharStats.init = newInitValue;
+		newCharStats.armr = newArmrValue;
+		newCharStats.hlth = newHlthValue;
+		newCharStats.dmge = newHlthValue;
 		let tableArray = [...tableData];
 		let index = tableArray.map((e) => e.key).indexOf(updateInitTarget);
-		let update = tableArray[index];
-		update.init = parseInt(newInitValue);
-		tableArray[index] = update;
+		tableArray[index] = newCharStats;
 		let finalArray = sortTableData(tableArray);
 		updateTableData(finalArray);
 		setShowModal(false);
@@ -390,10 +407,14 @@ const Provider = ({ children }) => {
 				handleDmgeButton,
 				handleDeathButton,
 				newInitValue,
-				setNewInitValue,
-				handleInitUpdate,
+				newArmrValue,
+				newHlthValue,
+				stats2Update,
+				handleCharUpdate,
 				handleNewInit,
-				submitNewInit,
+				handleNewArmr,
+				handleNewHlth,
+				submitNewStats,
 				showModal,
 				monsterManual,
 				isMonsterManual,

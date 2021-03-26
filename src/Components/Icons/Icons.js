@@ -1,5 +1,3 @@
-import React from "react";
-
 export const Info = () => <i className='info'></i>;
 
 export const DND = () => <i className='dnd'></i>;

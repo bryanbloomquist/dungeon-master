@@ -4,8 +4,6 @@ import Banner from "./Components/Banner/Banner";
 import Login from "./Components/Login/Login";
 import Confirm from "./Components/Login/Confirm/Confirm";
 import MainBody from "./Components/MainBody/MainBody";
-import Sidebar from "./Components/MainBody/Sidebar/Sidebar";
-import CombatTable from "./Components/MainBody/CombatTable/CombatTable";
 import Modal from "./Components/Modal/Modal";
 
 import "./SCSS/main.scss";
@@ -16,10 +14,7 @@ const App = () => {
 			<Banner />
 			<Login />
 			<Confirm />
-			<MainBody>
-				<Sidebar />
-				<CombatTable />
-			</MainBody>
+			<MainBody />
 			<Modal />
 		</Provider>
 	);

@@ -19,7 +19,6 @@ const Login = () => {
 				text='Enter Group Name'
 				changed={handleGroupChange}
 				value={groupName}
-				// enter={(e) => (e.key === "Enter" ? handleGroupChange : null)}
 			/>
 			<Button clicked={handleLoginSubmit} title={"submit"} />
 		</div>
