@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/dungeon-master/static/css/main.0892117d.chunk.css",
-    "main.js": "/dungeon-master/static/js/main.f82f2c8b.chunk.js",
-    "main.js.map": "/dungeon-master/static/js/main.f82f2c8b.chunk.js.map",
+    "main.css": "/dungeon-master/static/css/main.7c4cb6ec.chunk.css",
+    "main.js": "/dungeon-master/static/js/main.58740133.chunk.js",
+    "main.js.map": "/dungeon-master/static/js/main.58740133.chunk.js.map",
     "runtime-main.js": "/dungeon-master/static/js/runtime-main.13e393a3.js",
     "runtime-main.js.map": "/dungeon-master/static/js/runtime-main.13e393a3.js.map",
-    "static/js/2.cc1f5b4b.chunk.js": "/dungeon-master/static/js/2.cc1f5b4b.chunk.js",
-    "static/js/2.cc1f5b4b.chunk.js.map": "/dungeon-master/static/js/2.cc1f5b4b.chunk.js.map",
+    "static/js/2.f113ebb4.chunk.js": "/dungeon-master/static/js/2.f113ebb4.chunk.js",
+    "static/js/2.f113ebb4.chunk.js.map": "/dungeon-master/static/js/2.f113ebb4.chunk.js.map",
     "index.html": "/dungeon-master/index.html",
-    "static/css/main.0892117d.chunk.css.map": "/dungeon-master/static/css/main.0892117d.chunk.css.map",
-    "static/js/2.cc1f5b4b.chunk.js.LICENSE.txt": "/dungeon-master/static/js/2.cc1f5b4b.chunk.js.LICENSE.txt",
+    "static/css/main.7c4cb6ec.chunk.css.map": "/dungeon-master/static/css/main.7c4cb6ec.chunk.css.map",
+    "static/js/2.f113ebb4.chunk.js.LICENSE.txt": "/dungeon-master/static/js/2.f113ebb4.chunk.js.LICENSE.txt",
     "static/media/main.scss": "/dungeon-master/static/media/dungeons-dragons-dice-roller-6275.24e159cd.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.13e393a3.js",
-    "static/js/2.cc1f5b4b.chunk.js",
-    "static/css/main.0892117d.chunk.css",
-    "static/js/main.f82f2c8b.chunk.js"
+    "static/js/2.f113ebb4.chunk.js",
+    "static/css/main.7c4cb6ec.chunk.css",
+    "static/js/main.58740133.chunk.js"
   ]
 }

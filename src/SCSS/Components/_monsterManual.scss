@@ -1,0 +1,36 @@
+.monsterManual {
+	padding: 2rem;
+	background-color: $color-beige;
+	&__title {
+		font-size: 4rem;
+		margin-bottom: 1rem;
+	}
+	&__subtitle {
+		font-style: italic;
+		color: $color-gray-dark;
+	}
+	&__row {
+		margin-bottom: 0.5rem;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+	}
+	&__attr {
+		text-transform: uppercase;
+		margin-right: 0.5rem;
+	}
+	&__data {
+		text-transform: capitalize;
+		color: $color-red;
+	}
+	&__desc {
+		font-family: serif;
+		font-style: italic;
+		text-transform: none;
+		color: $color-gray-dark;
+	}
+	&__hr {
+		margin: 1rem 0;
+		border: 2px solid $color-yellow;
+	}
+}

@@ -1,263 +1,262 @@
 import React, { useContext } from "react";
 import { Context } from "../../../AppContext";
-import Aux from "../../../HOC/Aux";
-import styled from "styled-components";
-
-const Title = styled.h2`
-	font-size: 4rem;
-	margin-bottom: 1rem;
-`;
-
-const Sub = styled.p`
-	font-style: italic;
-	color: #666666;
-`;
-
-const Row = styled.div`
-	margin-bottom: 0.5rem;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: flex-end;
-`;
-
-const Attr = styled.span`
-	text-transform: uppercase;
-	margin-right: 0.5rem;
-`;
-
-const Data = styled.span`
-	text-transform: capitalize;
-	color: #c41520;
-`;
-
-const Desc = styled.span`
-	font-family: serif;
-	font-style: italic;
-	text-transform: none;
-	color: #666666;
-`;
-
-const HR = styled.hr`
-	margin: 1rem 0;
-	border: 2px solid #ffbf00;
-`;
 
 const MonsterModalContent = () => {
 	const { monsterManual, monsterLoaded } = useContext(Context);
 	const stats = { ...monsterManual };
 	return (
 		monsterLoaded && (
-			<Aux>
-				<Title>{stats.name}</Title>
-				<Sub>
+			<div className='monsterManual'>
+				<h2 className='monsterManual__title'>{stats.name}</h2>
+				<h4 className='monsterManual__subtitle'>
 					{stats.size}&nbsp;
 					{stats.type}
 					{stats.subtype ? " (" + stats.subtype + ")" : null},&nbsp;
 					{stats.alignment}
-				</Sub>
-				<HR />
+				</h4>
+				<hr className='monsterManual__hr' />
 				{/* Armor Class / Hit Points / Hit Dice */}
-				<Row>
-					<Attr>
-						Armor Class: <Data>{stats.armor_class}</Data>
-					</Attr>
-				</Row>
-				<Row>
-					<Attr>
+				<div className='monsterManual__row'>
+					<span className='monsterManual__attr'>
+						Armor Class:{" "}
+						<span className='monsterManual__data'>{stats.armor_class}</span>
+					</span>
+				</div>
+				<div className='monsterManual__row'>
+					<span className='monsterManual__attr'>
 						hit points:&nbsp;
-						<Data>
+						<span className='monsterManual__data'>
 							{stats.hit_points} ({stats.hit_dice})
-						</Data>
-					</Attr>
-				</Row>
+						</span>
+					</span>
+				</div>
 				{/* Speed */}
-				<Row>
-					<Attr>
+				<div className='monsterManual__row'>
+					<span className='monsterManual__attr'>
 						Speed:&nbsp;
-						{stats.speed.walk && <Data>walk {stats.speed.walk}</Data>}
+						{stats.speed.walk && (
+							<span className='monsterManual__data'>
+								walk {stats.speed.walk}
+							</span>
+						)}
 						&nbsp;&nbsp;
-						{stats.speed.fly && <Data>fly {stats.speed.fly}</Data>}&nbsp;&nbsp;
-						{stats.speed.swim && <Data>swim {stats.speed.swim}</Data>}
-					</Attr>
-				</Row>
-				<HR />
+						{stats.speed.fly && (
+							<span className='monsterManual__data'>fly {stats.speed.fly}</span>
+						)}
+						&nbsp;&nbsp;
+						{stats.speed.swim && (
+							<span className='monsterManual__data'>
+								swim {stats.speed.swim}
+							</span>
+						)}
+					</span>
+				</div>
+				<hr className='monsterManual__hr' />
 				{/* STR / CON / DEX / INT / WIS / CHA */}
-				<Row>
-					<Attr>
-						STR: <Data>{stats.strength}</Data>&nbsp;
-					</Attr>
-					<Attr>
-						CON: <Data>{stats.constitution}</Data>&nbsp;
-					</Attr>
-					<Attr>
-						DEX: <Data>{stats.dexterity}</Data>&nbsp;
-					</Attr>
-					<Attr>
-						INT: <Data>{stats.intelligence}</Data>&nbsp;
-					</Attr>
-					<Attr>
-						WIS: <Data>{stats.wisdom}</Data>&nbsp;
-					</Attr>
-					<Attr>
-						CHA: <Data>{stats.charisma}</Data>
-					</Attr>
-				</Row>
-				<HR />
+				<div className='monsterManual__row'>
+					<span className='monsterManual__attr'>
+						STR: <span className='monsterManual__data'>{stats.strength}</span>
+						&nbsp;
+					</span>
+					<span className='monsterManual__attr'>
+						CON:{" "}
+						<span className='monsterManual__data'>{stats.constitution}</span>
+						&nbsp;
+					</span>
+					<span className='monsterManual__attr'>
+						DEX: <span className='monsterManual__data'>{stats.dexterity}</span>
+						&nbsp;
+					</span>
+					<span className='monsterManual__attr'>
+						INT:{" "}
+						<span className='monsterManual__data'>{stats.intelligence}</span>
+						&nbsp;
+					</span>
+					<span className='monsterManual__attr'>
+						WIS: <span className='monsterManual__data'>{stats.wisdom}</span>
+						&nbsp;
+					</span>
+					<span className='monsterManual__attr'>
+						CHA: <span className='monsterManual__data'>{stats.charisma}</span>
+					</span>
+				</div>
+				<hr className='monsterManual__hr' />
 				{/* Proficiencies */}
 				{stats.proficiencies.length > 0 && (
-					<Row>
-						<Attr>
+					<div className='monsterManual__row'>
+						<span className='monsterManual__attr'>
 							Savings Throws & Skills:&nbsp;
 							{stats.proficiencies.map((el, i) => {
 								const name = el.proficiency.name;
 								const save = name.includes("Saving Throw:");
 								const skll = name.includes("Skill:");
 								return (
-									<Data key={name}>
+									<span className='monsterManual__data' key={name}>
 										{i > 0 && ", "}
 										{save && name.replace("Saving Throw: ", "")}
 										{skll && name.replace("Skill: ", "")}+{el.value}
-									</Data>
+									</span>
 								);
 							})}
-						</Attr>
-					</Row>
+						</span>
+					</div>
 				)}
 				{/* Damage Vulnerablities */}
 				{stats.damage_vulnerabilities.length > 0 && (
-					<Row>
-						<Attr>
+					<div className='monsterManual__row'>
+						<span className='monsterManual__attr'>
 							damage vulnerabilities:
-							<Data> {stats.damage_vulnerabilities.join(", ")}</Data>
-						</Attr>
-					</Row>
+							<span className='monsterManual__data'>
+								{" "}
+								{stats.damage_vulnerabilities.join(", ")}
+							</span>
+						</span>
+					</div>
 				)}
 				{/* Damage Resistances */}
 				{stats.damage_resistances.length > 0 && (
-					<Row>
-						<Attr>
+					<div className='monsterManual__row'>
+						<span className='monsterManual__attr'>
 							damage resistances:
-							<Data> {stats.damage_resistances.join(", ")}</Data>
-						</Attr>
-					</Row>
+							<span className='monsterManual__data'>
+								{" "}
+								{stats.damage_resistances.join(", ")}
+							</span>
+						</span>
+					</div>
 				)}
 				{/* Damage Immunities */}
 				{stats.damage_immunities.length > 0 && (
-					<Row>
-						<Attr>
+					<div className='monsterManual__row'>
+						<span className='monsterManual__attr'>
 							damage immunities:
-							<Data> {stats.damage_immunities.join(", ")}</Data>
-						</Attr>
-					</Row>
+							<span className='monsterManual__data'>
+								{" "}
+								{stats.damage_immunities.join(", ")}
+							</span>
+						</span>
+					</div>
 				)}
 				{/* Condition Immunities */}
 				{stats.condition_immunities.length > 0 && (
-					<Row>
-						<Attr>
+					<div className='monsterManual__row'>
+						<span className='monsterManual__attr'>
 							condition immunities:&nbsp;
-							<Data>
+							<span className='monsterManual__data'>
 								{stats.condition_immunities.map((cond, i) => {
 									return i > 0 ? ", " + cond.index : cond.index;
 								})}
-							</Data>
-						</Attr>
-					</Row>
+							</span>
+						</span>
+					</div>
 				)}
 				{/* Senses */}
-				<Row>
-					<Attr>
+				<div className='monsterManual__row'>
+					<span className='monsterManual__attr'>
 						Senses:&nbsp;
-						<Data>Passive Perception {stats.senses.passive_perception}, </Data>
+						<span className='monsterManual__data'>
+							Passive Perception {stats.senses.passive_perception},{" "}
+						</span>
 						{stats.senses.darkvision && (
-							<Data>darkvision {stats.senses.darkvision}, </Data>
+							<span className='monsterManual__data'>
+								darkvision {stats.senses.darkvision},{" "}
+							</span>
 						)}
 						{stats.senses.blindsight && (
-							<Data>blindsight {stats.senses.blindsight}, </Data>
+							<span className='monsterManual__data'>
+								blindsight {stats.senses.blindsight},{" "}
+							</span>
 						)}
 						{stats.senses.truesight && (
-							<Data>truesight {stats.senses.truesight}, </Data>
+							<span className='monsterManual__data'>
+								truesight {stats.senses.truesight},{" "}
+							</span>
 						)}
 						{stats.senses.tremorsense && (
-							<Data>tremorsense {stats.senses.tremorsense}, </Data>
+							<span className='monsterManual__data'>
+								tremorsense {stats.senses.tremorsense},{" "}
+							</span>
 						)}
-					</Attr>
-				</Row>
+					</span>
+				</div>
 				{/* Languages */}
 				{stats.languages.length > 0 && (
-					<Row>
-						<Attr>
+					<div className='monsterManual__row'>
+						<span className='monsterManual__attr'>
 							languages:&nbsp;
-							<Data>{stats.languages}</Data>
-						</Attr>
-					</Row>
+							<span className='monsterManual__data'>{stats.languages}</span>
+						</span>
+					</div>
 				)}
 				{/* Challenge Rating / Experience Points */}
-				<Row>
-					<Attr>
+				<div className='monsterManual__row'>
+					<span className='monsterManual__attr'>
 						Challenge Rating:&nbsp;
-						<Data>
+						<span className='monsterManual__data'>
 							{stats.challenge_rating} ({stats.xp}XP)
-						</Data>
-					</Attr>
-				</Row>
-				<HR />
+						</span>
+					</span>
+				</div>
+				<hr className='monsterManual__hr' />
 				{/* Special Abilities */}
 				{stats.special_abilities && stats.special_abilities.length > 0 && (
 					<div>
-						<Row>
+						<div className='monsterManual__row'>
 							{stats.special_abilities.map((ability) => {
 								return (
-									<Attr key={ability.name}>
-										<Data>{ability.name}: </Data>
-										<Desc>{ability.desc}</Desc>
-									</Attr>
+									<span className='monsterManual__attr' key={ability.name}>
+										<span className='monsterManual__data'>
+											{ability.name}:{" "}
+										</span>
+										<span className='monsterManual__desc'>{ability.desc}</span>
+									</span>
 								);
 							})}
-						</Row>
-						<HR />
+						</div>
+						<hr className='monsterManual__hr' />
 					</div>
 				)}
 				{/* Actions */}
-				<Row>
-					<Attr>Actions:</Attr>
-				</Row>
-				<Row>
+				<div className='monsterManual__row'>
+					<span className='monsterManual__attr'>Actions:</span>
+				</div>
+				<div className='monsterManual__row'>
 					{stats.actions.map((action) => {
 						return (
-							<Attr key={action.name}>
-								<Data>{action.name}: </Data>
-								<Desc>{action.desc}</Desc>
-							</Attr>
+							<span className='monsterManual__attr' key={action.name}>
+								<span className='monsterManual__data'>{action.name}: </span>
+								<span className='monsterManual__desc'>{action.desc}</span>
+							</span>
 						);
 					})}
-				</Row>
+				</div>
 				{/* Legendary Actions */}
 				{stats.legendary_actions && (
 					<div>
-						<HR />
-						<Row>
-							<Attr>Legendary Actions</Attr>
-							<Desc>
+						<hr className='monsterManual__hr' />
+						<div className='monsterManual__row'>
+							<span className='monsterManual__attr'>Legendary Actions</span>
+							<span className='monsterManual__desc'>
 								This creature can take 3 legendary actions, choosing from the
 								options below. Only one legendary action option can be used at a
 								time and only at the end of another creature's turn. The
 								creature regains spent legendary actions at the start of its
 								turn.
-							</Desc>
-						</Row>
-						<Row>
+							</span>
+						</div>
+						<div className='monsterManual__row'>
 							{stats.legendary_actions.map((action) => {
 								return (
-									<Attr key={action.name}>
-										<Data>{action.name}: </Data>
-										<Desc>{action.desc}</Desc>
-									</Attr>
+									<span className='monsterManual__attr' key={action.name}>
+										<span className='monsterManual__data'>{action.name}: </span>
+										<span className='monsterManual__desc'>{action.desc}</span>
+									</span>
 								);
 							})}
-						</Row>
+						</div>
 					</div>
 				)}
-			</Aux>
+			</div>
 		)
 	);
 };
