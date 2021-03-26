@@ -4,7 +4,7 @@ import { Context } from "../../../AppContext";
 const InitiativeModalContent = () => {
 	const { handleNewInit, submitNewInit } = useContext(Context);
 	return (
-		<div className='initiative_modal'>
+		<div className='characterModal'>
 			<span>Enter new initiative value:</span>
 			<input onChange={handleNewInit} type='number' min='-5' max='30' />
 			<button onClick={submitNewInit}>Submit</button>

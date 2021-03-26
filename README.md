@@ -10,9 +10,9 @@ Deployed App: [bryanbloomquist.github.io/dungeon-master](https://bryanbloomquist
 
 An initiative combat tracker app for dungeon masters. Keeps track of initiative and damage to party members and monsters. Searches the SRD (Standard Reference Dictionary) from Wizards of the Coast for open source monsters to add to table with stats. Forgot your dice, not a problem, you can even roll your dice with our app. Enter your unique group name and you and your players can share the same screen.
 
-## Technologies USed
+## Technologies Used
 
-- React, Sass, Themed-Components
+- React, Sass, Firestore
 
 ## Special Thanks
 
