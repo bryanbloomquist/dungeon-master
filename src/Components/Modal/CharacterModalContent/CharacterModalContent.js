@@ -17,8 +17,7 @@ const CharcacterModalContent = () => {
 
 	return (
 		<div className='characterModal'>
-			<h4 className='charcterModal__title'>Update {stats2Update.name}</h4>
-			<Label for='newInit'>Update Initiative?</Label>
+			<Label for='newInit'>New Initiative:</Label>
 			<Input
 				type='num'
 				placeholder={newInitValue}
@@ -28,7 +27,7 @@ const CharcacterModalContent = () => {
 				min={-5}
 				max={30}
 			/>
-			<Label for='newArmr'>Update Armor Class?</Label>
+			<Label for='newArmr'>New Armor Class:</Label>
 			<Input
 				type='num'
 				placeholder={stats2Update.armr}
@@ -38,7 +37,7 @@ const CharcacterModalContent = () => {
 				min={0}
 				max={25}
 			/>
-			<Label for='newHlth'>Update Hit Points?</Label>
+			<Label for='newHlth'>New Hit Points:</Label>
 			<Input
 				type='num'
 				placeholder={stats2Update.hlth}
@@ -48,7 +47,7 @@ const CharcacterModalContent = () => {
 				min={0}
 				max={500}
 			/>
-			<button onClick={submitNewStats}>Submit</button>
+			<button onClick={submitNewStats}>Update {stats2Update.name}</button>
 		</div>
 	);
 };

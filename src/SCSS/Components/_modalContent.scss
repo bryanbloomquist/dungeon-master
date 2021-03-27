@@ -34,3 +34,17 @@
 		border: 2px solid $color-yellow;
 	}
 }
+
+.characterModal {
+	padding: 1rem;
+	& label {
+		padding: 1rem;
+		display: inline-block;
+		width: calc(50% - 2rem);
+		text-align: right;
+	}
+	& input {
+		display: inline-block;
+		width: 50%;
+	}
+}
