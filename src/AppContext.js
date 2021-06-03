@@ -310,7 +310,6 @@ const Provider = ({ children }) => {
 	const [updateInitTarget, setUpdateInitTarget] = useState("");
 
 	const handleCharUpdate = (target) => {
-		console.log(target);
 		let tableArray = [...tableData];
 		let index = tableArray.map((e) => e.key).indexOf(target);
 		let update = tableArray[index];
@@ -332,7 +331,6 @@ const Provider = ({ children }) => {
 
 	const submitNewStats = () => {
 		let newCharStats = { ...stats2Update };
-		console.log(newCharStats);
 		newCharStats.init = newInitValue;
 		newCharStats.armr = newArmrValue;
 		newCharStats.hlth = newHlthValue;
@@ -353,12 +351,12 @@ const Provider = ({ children }) => {
 	const [monsterManual, setMonsterManual] = useState({});
 
 	const handleLoadStats = (target) => {
-		const monster = monsterNamesArray.map((e) => e.name).indexOf(target);
-		if (monster > -1) {
+		const monster = monsterStatsArray.find((e) => e.name === target);
+		if (monster) {
 			const bool = !showModal;
 			setIsMonsterManual(true);
 			setMonsterLoaded(bool);
-			setMonsterManual(monsterStatsArray[monster]);
+			setMonsterManual(monster);
 			setShowModal(bool);
 		}
 	};
