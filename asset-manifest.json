@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/dungeon-master/static/css/main.ca1a3400.chunk.css",
-    "main.js": "/dungeon-master/static/js/main.744937f2.chunk.js",
-    "main.js.map": "/dungeon-master/static/js/main.744937f2.chunk.js.map",
+    "main.js": "/dungeon-master/static/js/main.2b83fa9f.chunk.js",
+    "main.js.map": "/dungeon-master/static/js/main.2b83fa9f.chunk.js.map",
     "runtime-main.js": "/dungeon-master/static/js/runtime-main.13e393a3.js",
     "runtime-main.js.map": "/dungeon-master/static/js/runtime-main.13e393a3.js.map",
     "static/js/2.f0f8964e.chunk.js": "/dungeon-master/static/js/2.f0f8964e.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.13e393a3.js",
     "static/js/2.f0f8964e.chunk.js",
     "static/css/main.ca1a3400.chunk.css",
-    "static/js/main.744937f2.chunk.js"
+    "static/js/main.2b83fa9f.chunk.js"
   ]
 }
